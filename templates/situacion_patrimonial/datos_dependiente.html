@@ -1,0 +1,204 @@
+<article>
+  <h3 class="title">7. Datos del dependiente económico</h3>
+  {% if datosDependientesEconomicos.dependienteEconomico|length == 0 or datosDependientesEconomicos.ninguno %}
+    <div class="column text-center">Ningún Dependiente Economico</div>
+  {% endif %}
+  {% if datosDependientesEconomicos is defined %}
+    {% for item in datosDependientesEconomicos.dependienteEconomico %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Nombre</div>
+        <div class="column right-size text-justify text-light white-background">{{item.nombre}} {{item.primerApellido}} {{item.segundoApellido}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">fechaNacimiento</div>
+        <div class="column right-size text-justify text-light white-background">{{item.fechaNacimiento|formatdatetime}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">CURP</div>
+        <div class="column right-size text-justify text-light white-background">{{item.curp}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">RFC</div>
+        <div class="column right-size text-justify text-light white-background">{{item.rfc}}</div>
+      </div>
+      {% if item.parentescoRelacion%}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Relación con el declarante</div>
+        <div class="column right-size text-justify text-light white-background">{{item.parentescoRelacion.valor}}</div>
+      </div>
+      {% endif %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">¿Es Ciudadano Extranjero?</div>
+        <div class="column right-size text-justify text-light white-background">{{item.extranjero|toSiNo}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">¿Habita en el domicilio del declarante?</div>
+        <div class="column right-size text-justify text-light white-background">{{item.habitaDomicilioDeclarante|toSiNo}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">Lugar donde reside</div>
+        <div class="column right-size text-justify text-light white-background">{{item.lugarDondeReside}}</div>
+      </div>
+
+      <div class="row white-background-wd-100">
+        <h4 class="text-left no-margin">Domicilio {% if item.domicilioMexico %} México {% endif %} {% if item.domicilioExtranjero %} Extranjero {% endif %}</h4>
+      </div>
+
+      {% if item.domicilioMexico %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">CALLE</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.calle }} </div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">NÚMERO EXTERIOR</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.numeroExterior }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.numeroInterior }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.codigoPostal }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">COLONIA</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.coloniaLocalidad }}</div>
+        </div>
+        {% if item.domicilioMexico.municipioAlcaldia %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">ALCALDIA</div>
+            <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.municipioAlcaldia.valor }}</div>
+          </div>
+        {% endif %}
+        {% if item.domicilioMexico.entidadFederativa %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">ENTIDAD FEDERATIVA</div>
+            <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.entidadFederativa.valor }}</div>
+          </div>
+        {% endif %}
+      {% endif %}
+      {% if item.domicilioExtranjero %}
+          <div class="row">
+              <div class="column left-size text-left blue-background">CALLE</div>
+              <div class="column right-size text-justify text-light white-background">
+                  {{ item.domicilioExtranjero.calle }} </div>
+          </div>
+          <div class="row">
+              <div class="column left-size text-left blue-background">NÚMERO EXTERIOR</div>
+              <div class="column right-size text-justify text-light white-background">
+                  {{ item.domicilioExtranjero.numeroExterior }}</div>
+          </div>
+          <div class="row">
+              <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
+              <div class="column right-size text-justify text-light white-background">
+                  {{ item.domicilioExtranjero.numeroInterior }}</div>
+          </div>
+          <div class="row">
+              <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
+              <div class="column right-size text-justify text-light white-background">
+                  {{ item.domicilioExtranjero.codigoPostal }}</div>
+          </div>
+          <div class="row">
+              <div class="column left-size text-left blue-background">Ciudad</div>
+              <div class="column right-size text-justify text-light white-background">
+                  {{ item.domicilioExtranjero.ciudadLocalidad }}</div>
+          </div>
+          <div class="row">
+              <div class="column left-size text-left blue-background">estado</div>
+              <div class="column right-size text-justify text-light white-background">
+                  {{ item.domicilioExtranjero.estadoProvincia }}</div>
+          </div>
+          <div class="row">
+              <div class="column left-size text-left blue-background">país</div>
+              <div class="column right-size text-justify text-light white-background">
+                  {{ item.domicilioExtranjero.pais|countryFormat }}</div>
+          </div>
+      {% endif %}
+
+      {% if item.actividadLaboral %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Actividad Laboral</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboral.valor}}</div>
+        </div>
+      {% endif %}
+      {% if item.actividadLaboral.clave == 'PUB' %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nivel u Orden de Gobierno</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.nivelOrdenGobierno}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Ámbito Público</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.ambitoPublico}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nombre del Ente Público</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.nombreEntePublico}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Área Adscripción</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.areaAdscripcion}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Empleo, Cargo o Comisión</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.empleoCargoComision}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">función Principal</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.funcionPrincipal}}</div>
+        </div>
+        {% if item.actividadLaboralSectorPublico.salarioMensualNeto %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Salario Mensual Neto</div>
+            <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.salarioMensualNeto.valor}} {{item.actividadLaboralSectorPublico.salarioMensualNeto.moneda}}</div>
+          </div>
+        {% endif %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Fecha de Ingreso</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.fechaIngreso|formatdatetime}}</div>
+        </div>
+      {% endif %}
+      {% if item.actividadLaboral.clave == 'PRI' or item.actividadLaboral.clave == 'OTRO' %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nombre de la Empresa, Sociedad o Asociacion</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPrivadoOtro.nombreEmpresaSociedadAsociacion}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Empleo, Cargo o Comision</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPrivadoOtro.empleoCargoComision}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">rfc</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPrivadoOtro.rfc}}</div>
+        </div>
+        {% if item.actividadLaboralSectorPrivadoOtro.sector %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">sector</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPrivadoOtro.sector.valor}}</div>
+        </div>
+        {% endif %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Fecha de Ingreso</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPrivadoOtro.fechaIngreso|formatdatetime}}</div>
+        </div>
+        {% if item.actividadLaboralSectorPrivadoOtro.salarioMensualNeto %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Salario Mensual Neto</div>
+            <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPrivadoOtro.salarioMensualNeto.valor}} {{item.actividadLaboralSectorPrivadoOtro.salarioMensualNeto.moneda}}</div>
+          </div>
+        {% endif %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">¿Es proveedor o Contratista de Gobierno?</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPrivadoOtro.proveedorContratistaGobierno|toSiNo}}</div>
+        </div>
+      {% endif %}
+      {% if not loop.last %}<br>{% endif %}
+    {% endfor %}
+    {% if datosDependientesEconomicos.aclaracionesObservaciones %}
+      <div class="row">
+        <div class="column left-size text-left blue-background" style="width: 34%">Aclaraciones/Observaciones</div>
+        <div class="column text-justify text-light white-background" style="width: 64%">{{datosDependientesEconomicos.aclaracionesObservaciones}}</div>
+      </div>
+    {% endif %}
+  {% endif %}
+</article>

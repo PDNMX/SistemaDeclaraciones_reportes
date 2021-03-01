@@ -1,0 +1,18 @@
+@page {
+    
+    @left-middle {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-image: url(../assets/versionPreviaVertical.png);
+      background-size: contain;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+    }
+  }
+body {
+    background-image: url(../assets/versionPrevia.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}

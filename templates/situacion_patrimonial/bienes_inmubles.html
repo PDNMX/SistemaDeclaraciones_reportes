@@ -1,0 +1,188 @@
+<article>
+  <h3 class="title">10. Bienes inmubles (situación actual)</h3>
+  {% if bienesInmuebles.bienInmueble|length == 0 %}
+    <div class="column text-center">Ningún Bien Inmuble</div>
+  {% endif %}
+  {% if bienesInmuebles is defined %}
+    {% for item in bienesInmuebles.bienInmueble %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Titular</div>
+        <div class="column right-size text-justify text-light white-background">{% for titular in item.titular %}{{titular.valor}}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+      </div>
+
+      <div class="row white-background-wd-100">
+        <h4 class="text-left no-margin">Tercero</h4>
+      </div>
+
+      {% for tercero in item.tercero%}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nombre o Razon Social</div>
+          <div class="column right-size text-justify text-light white-background">{{ tercero.nombreRazonSocial }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo Persona</div>
+          <div class="column right-size text-justify text-light white-background">{{ tercero.tipoPersona }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">rfc</div>
+          <div class="column right-size text-justify text-light white-background">{{ tercero.rfc }}</div>
+        </div>
+      {% endfor %}
+
+      <div class="row white-background-wd-100">
+        <h4 class="text-left no-margin">Transmisor</h4>
+      </div>
+
+      {% for transmisor in item.transmisor%}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nombre o Razon Social</div>
+          <div class="column right-size text-justify text-light white-background">{{ transmisor.nombreRazonSocial }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo Persona</div>
+          <div class="column right-size text-justify text-light white-background">{{ transmisor.tipoPersona }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">rfc</div>
+          <div class="column right-size text-justify text-light white-background">{{ transmisor.rfc }}</div>
+        </div>
+        {% if transmisor.relacion %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Relación</div>
+            <div class="column right-size text-justify text-light white-background">{{ transmisor.relacion.valor }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% if item.tipoInmueble %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo Inmueble</div>
+          <div class="column right-size text-justify text-light white-background">{{item.tipoInmueble.valor}}</div>
+        </div>
+      {% endif %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Porcentaje Propiedad</div>
+        <div class="column right-size text-justify text-light white-background">{{item.porcentajePropiedad}}</div>
+      </div>
+      {% if item.superficieTerreno %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Superficie Terreno</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.superficieTerreno.valor }}</div>
+        </div>
+      {% endif %}
+      {% if item.superficieConstruccion %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Superficie Construcción</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.superficieConstruccion.valor }}</div>
+        </div>
+      {% endif %}
+      {% if item.formaAdquisicion %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Forma de Adquisición</div>
+          <div class="column right-size text-justify text-light white-background">{{item.formaAdquisicion.valor}}</div>
+        </div>
+      {% endif %}
+      {% if item.valorAdquisicion %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Valor de Adquisición</div>
+          <div class="column right-size text-justify text-light white-background">{{item.valorAdquisicion.valor}} {{item.valorAdquisicion.moneda}}</div>
+        </div>
+      {% endif %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Fecha de Adquisición</div>
+        <div class="column right-size text-justify text-light white-background">{{item.fechaAdquisicion|formatdatetime}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">Dato de Identificación</div>
+        <div class="column right-size text-justify text-light white-background">{{item.datoIdentificacion}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">Valor Conforme A: </div>
+        <div class="column right-size text-justify text-light white-background">{{item.valorConformeA}}</div>
+      </div>
+
+      <div class="row white-background-wd-100">
+        <h4 class="text-left no-margin">Domicilio {% if item.domicilioMexico %} México {% endif %} {% if item.domicilioExtranjero %} Extranjero {% endif %}</h4>
+      </div>
+
+      {% if item.domicilioMexico %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">CALLE</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.calle }} </div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">NÚMERO EXTERIOR</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.numeroExterior }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.numeroInterior }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.codigoPostal }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">COLONIA</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.coloniaLocalidad }}</div>
+        </div>
+        {% if item.domicilioMexico.municipioAlcaldia %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">ALCALDIA</div>
+            <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.municipioAlcaldia.valor }}</div>
+          </div>
+        {% endif %}
+        {% if item.domicilioMexico.entidadFederativa %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">ENTIDAD FEDERATIVA</div>
+            <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.entidadFederativa.valor }}</div>
+          </div>
+        {% endif %}
+      {% endif %}
+      {% if item.domicilioExtranjero %}
+        <div class="row">
+            <div class="column left-size text-left blue-background">CALLE</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ item.domicilioExtranjero.calle }} </div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">NÚMERO EXTERIOR</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ item.domicilioExtranjero.numeroExterior }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ item.domicilioExtranjero.numeroInterior }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ item.domicilioExtranjero.codigoPostal }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">Ciudad</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ item.domicilioExtranjero.ciudadLocalidad }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">estado</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ item.domicilioExtranjero.estadoProvincia }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">país</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ item.domicilioExtranjero.pais|countryFormat }}</div>
+        </div>
+      {% endif %}
+      {% if not loop.last %}<br>{% endif %}
+    {% endfor %}
+    {% if bienesInmuebles.aclaracionesObservaciones %}
+      <div class="row">
+        <div class="column left-size text-left blue-background" style="width: 34%">Aclaraciones/Observaciones</div>
+        <div class="column text-justify text-light white-background" style="width: 64%">{{bienesInmuebles.aclaracionesObservaciones}}</div>
+      </div>
+    {% endif %}
+  {% endif %}
+</article>

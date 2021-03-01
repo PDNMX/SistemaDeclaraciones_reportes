@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,700");
+@page {
+  margin: 2.7cm 2cm 1.5cm 2cm;
+  size: Letter;
+  font-family: "Noto Sans", Arial, sans-serif;
+  position: relative;
+  color: rgba(96, 96, 96, 0.87);
+  text-transform: uppercase;
+
+  @top-left {
+    content: string(heading);
+    width: 70%;
+    min-height: 20pt;
+    margin-bottom: 15px;
+    border-bottom: solid 2px #34b3eb;
+    font-size: 13pt;
+    /*letter-spacing: 2px;*/
+    line-height: 18pt;
+    text-align: left;
+    padding-left: 10px;
+    font-weight: 300;
+  }
+
+  @top-right {
+    content: string(heading-right);
+    height: 25pt;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: solid 2px #34b3eb;
+    font-size: 10pt;
+    line-height: 15pt;
+    text-align: right;
+    font-weight: bold;
+    width: 200px;
+  }
+
+  @bottom-right {
+    content: counter(page) " / "counter(pages);
+    background-color: #fff;
+    color: #A8A8A8;
+    text-align: right;
+    width: 70px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 10pt;
+  }
+
+  @bottom-center {
+    height: 30px;
+    content: "Declaraciones Patrimoniales de Servidores Públicos";
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: #848483;
+    /*background-color: #34b3eb;*/
+  }
+
+  @bottom-left {
+    content: "";
+    width: 70px;
+    height: 35px;
+    margin-right: 10px;
+    background-image: url(../assets/pdn.png);
+    background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+article{
+  break-before: always;
+}
+html body article > h3:first-child {
+  font-size: 11px;
+  string-set: heading content();
+  visibility: hidden;
+  position: absolute;
+}
+html body > #declarationType {
+  font-size: 11px;
+  string-set: heading-right content();
+  visibility: hidden;
+  position: absolute;
+}
+
+body {
+  font-family: "Noto Sans", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 9pt;
+  color: rgba(96, 96, 96, 0.87);
+  text-transform: uppercase;
+  text-align: justify
+}
+article{
+  margin-top: 20px;
+  padding: 0;
+}
+h1, h2, h4, h5 {
+  font-weight: 300 !important;
+}
+h3 {
+  font-size: 15pt !important;
+  font-weight: 300 !important;
+}
+.block {
+  display: block;
+}
+.blue-background {
+  background-color: #54b4eb;
+  color: #fff;
+  padding: 8px 10px 8px 5px;
+  border-bottom: 1px solid #fff;
+  border-top: 1px solid #fff;
+}
+.blue-border-bottom {
+  border-bottom: 1px solid #54b4eb;
+}
+.blue-border-top {
+  border-top: 1px solid #54b4eb;
+}
+.blue-text {
+  color: #1b9be5;
+}
+.bold{
+  font-weight: bold;
+}
+.column {
+  display: inline-block;
+}
+article .row:nth-child(2)  .blue-background{
+  border-top: 2px solid #54b4eb;
+}
+article .row:last-child .blue-background {
+  border-bottom: 2px solid #54b4eb;
+}
+article .row:nth-child(2) .white-background{
+  border-top: 2px solid #54b4eb;
+}
+article .row:last-child .white-background {
+  border-bottom: 2px solid #54b4eb;
+}
+.left-size {
+  flex: 0 0 36%;
+}
+.mt-100px{
+  margin-top: 100px;
+}
+.mt-80px{
+  margin-top: 80px;
+}
+.no-decoration {
+  list-style: none;
+  padding: 0;
+}
+.no-margin{
+  margin: 0;
+}
+.right-size {
+  flex: 0 0 64%;
+}
+.row {
+  display: flex;
+}
+.text-center {
+  text-align: center !important;
+}
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.text-justify {
+  text-align: justify !important;
+}
+.text-light {
+  font-weight: lighter;
+}
+.titular-secretaria{
+  display: inline-block;
+  width: 65%;
+}
+.white-background {
+  padding: 8px 10px 8px 5px;
+  border-bottom: 1px solid #54b4eb;
+  border-top: 1px solid #54b4eb;
+  border-right: 2px solid #54b4eb;
+}
+.white-background-wd-100 {
+  padding: 10px 10px 10px 5px;
+  border: 1px solid #54b4eb;
+  border-width: 1px 2px;
+}

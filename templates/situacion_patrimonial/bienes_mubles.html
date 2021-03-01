@@ -1,0 +1,97 @@
+<article>
+  <h3 class="title">12. Bienes muebles (situación actual)</h3>
+  {% if bienesMuebles.bienMueble|length == 0 or bienesMuebles.ninguno %}
+    <div class="column text-center">Ningún Bien Mueble</div>
+  {% endif %}
+  {% if bienesMuebles is defined %}
+    {% for item in bienesMuebles.bienMueble %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Titular</div>
+        <div class="column right-size text-justify text-light white-background">{% for titular in item.titular %}{{titular.valor}} {% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+      </div>
+
+      <div class="row white-background-wd-100">
+        <h4 class="text-left no-margin">Tercero</h4>
+      </div>
+
+      {% for tercero in item.tercero%}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nombre o Razon Social</div>
+          <div class="column right-size text-justify text-light white-background">{{ tercero.nombreRazonSocial }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo Persona</div>
+          <div class="column right-size text-justify text-light white-background">{{ tercero.tipoPersona }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">rfc</div>
+          <div class="column right-size text-justify text-light white-background">{{ tercero.rfc }}</div>
+        </div>
+      {% endfor %}
+
+      <div class="row white-background-wd-100">
+        <h4 class="text-left no-margin">Transmisor</h4>
+      </div>
+
+      {% for transmisor in item.transmisor%}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nombre o Razon Social</div>
+          <div class="column right-size text-justify text-light white-background">{{ transmisor.nombreRazonSocial }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo Persona</div>
+          <div class="column right-size text-justify text-light white-background">{{ transmisor.tipoPersona }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">rfc</div>
+          <div class="column right-size text-justify text-light white-background">{{ transmisor.rfc }}</div>
+        </div>
+        {% if transmisor.relacion %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Relación</div>
+            <div class="column right-size text-justify text-light white-background">{{ transmisor.relacion.valor }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% if item.tipoBien %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo Bien</div>
+          <div class="column right-size text-justify text-light white-background">{{item.tipoBien.valor}}</div>
+        </div>
+      {% endif %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Descripción General del Bien</div>
+        <div class="column right-size text-justify text-light white-background">{{item.descripcionGeneralBien}}</div>
+      </div>
+      {% if item.formaAdquisicion %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Forma de Adquisición</div>
+          <div class="column right-size text-justify text-light white-background">{{item.formaAdquisicion.valor}}</div>
+        </div>
+      {% endif %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Forma de Pago</div>
+        <div class="column right-size text-justify text-light white-background">{{item.formaPago}}</div>
+      </div>
+      {% if item.valorAdquisicion %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Valor de Adquisición</div>
+          <div class="column right-size text-justify text-light white-background">{{item.valorAdquisicion.valor}}
+            {{item.valorAdquisicion.moneda}}</div>
+        </div>
+      {% endif %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Fecha de Adquisición</div>
+        <div class="column right-size text-justify text-light white-background">{{item.fechaAdquisicion|formatdatetime}}</div>
+      </div>
+      {% if not loop.last %}<br>{% endif %}
+    {% endfor %}
+    {% if bienesMuebles.aclaracionesObservaciones %}
+      <div class="row">
+        <div class="column left-size text-left blue-background" style="width: 34%">Aclaraciones/Observaciones</div>
+        <div class="column text-justify text-light white-background" style="width: 64%">{{bienesMuebles.aclaracionesObservaciones}}</div>
+      </div>
+    {% endif %}
+  {% endif %}
+</article>

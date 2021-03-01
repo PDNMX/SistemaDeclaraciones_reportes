@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Acuse de declaración</title>
+</head>
+
+<body>
+  <span id="declarationType">Declaración {{ tipoDeclaracion }}</span>
+
+{% if datosGenerales%}
+  <!-- Situación patrimonial -->
+
+  {% include "templates/acuse.html" %}
+
+  <!-- Situación patrimonial -->
+
+  {% include "templates/declaracion.html" %}
+
+{% endif %}
+
+  <!-- Situación patrimonial -->
+
+  {% include "templates/situacion_patrimonial.html" %}
+
+  <!-- Intereses -->
+
+  {% include "templates/intereses.html" %}
+  
+</body>
+
+</html>

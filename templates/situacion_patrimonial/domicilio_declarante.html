@@ -1,0 +1,88 @@
+<article>
+    <h3 class="title">2. Domicilio del declarante</h3>
+    {% if domicilioDeclarante.domicilioMexico %}
+        <div class="row">
+            <div class="column left-size text-left blue-background">CALLE</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioMexico.calle }} </div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">NÚMERO EXTERIOR</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioMexico.numeroExterior }}</div>
+        </div>
+        {% if domicilioDeclarante.domicilioMexico.numeroInterior %}
+            <div class="row">
+                <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
+                <div class="column right-size text-justify text-light white-background">
+                    {{ domicilioDeclarante.domicilioMexico.numeroInterior }}</div>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioMexico.codigoPostal }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">COLONIA</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioMexico.coloniaLocalidad }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">ALCALDIA</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioMexico.municipioAlcaldia.valor }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">ENTIDAD FEDERATIVA</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioMexico.entidadFederativa.valor }}</div>
+        </div>
+    {% endif %}
+    {% if domicilioDeclarante.domicilioExtranjero %}
+        <div class="row">
+            <div class="column left-size text-left blue-background">CALLE</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioExtranjero.calle }} </div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">NÚMERO EXTERIOR</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioExtranjero.numeroExterior }}</div>
+        </div>
+        {% if domicilioDeclarante.domicilioExtranjero.numeroInterior %}
+            <div class="row">
+                <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
+                <div class="column right-size text-justify text-light white-background">
+                    {{ domicilioDeclarante.domicilioExtranjero.numeroInterior }}</div>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioExtranjero.codigoPostal }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">Ciudad</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioExtranjero.ciudadLocalidad }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">estado</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioExtranjero.estadoProvincia }}</div>
+        </div>
+        <div class="row">
+            <div class="column left-size text-left blue-background">país</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.domicilioExtranjero.pais|countryFormat }}</div>
+        </div>
+    {% endif %}
+    {% if domicilioDeclarante.aclaracionesObservaciones %}
+        <div class="row">
+            <div class="column left-size text-left blue-background">Aclaraciones/Observaciones</div>
+            <div class="column right-size text-justify text-light white-background">
+                {{ domicilioDeclarante.aclaracionesObservaciones }}</div>
+        </div>
+    {% endif %}
+</article>

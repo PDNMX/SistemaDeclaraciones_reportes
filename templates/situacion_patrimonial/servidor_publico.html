@@ -1,0 +1,170 @@
+<article>
+    <h3 class="title">9. Actividad Anual Anterior</h3>
+    <div class="row">
+      <div class="column left-size text-left blue-background">¿Te desempeñaste como servidor publico el año anterior?</div>
+      <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.servidorPublicoAnioAnterior|toSiNo }}</div>
+    </div>
+    {% if actividadAnualAnterior.servidorPublicoAnioAnterior %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Fecha Ingreso</div>
+        <div class="column text-justify text-light white-background" style="width: 20%">{{ actividadAnualAnterior.fechaIngreso|formatdatetime }}</div>
+        <div class="column text-left blue-background blue-border-bottom blue-border-top" style="width: 24%">Fecha Conclusión</div>
+        <div class="column text-justify text-light white-background" style="width: 20%">{{ actividadAnualAnterior.fechaConclusion|formatdatetime }}</div>
+      </div>
+      {% if actividadAnualAnterior.remuneracionNetaCargoPublico %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Remuneracion Neta Cargo Publico</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.remuneracionNetaCargoPublico.valor }} {{ actividadAnualAnterior.remuneracionNetaCargoPublico.moneda }} </div>
+        </div>
+      {% endif %}
+      {% if actividadAnualAnterior.otrosIngresosTotal %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">otros Ingresos Total</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.otrosIngresosTotal.valor }} {{ actividadAnualAnterior.otrosIngresosTotal.moneda }}</div>
+        </div>
+      {% endif %}
+
+      <div class="row white-background-wd-100">
+      <h4 class="text-left no-margin">Actividad Industrial, Comercial o Empresarial</h4>
+      </div>
+
+      {% for actividad in actividadAnualAnterior.actividadIndustrialComercialEmpresarial.actividades %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nombre de la Razón Social</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividad.nombreRazonSocial }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo de Negocio</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividad.tipoNegocio }}</div>
+        </div>
+        {% if actividad.remuneracion %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Remuneración</div>
+            <div class="column right-size text-justify text-light white-background">{{ actividad.remuneracion.valor }} {{ actividad.remuneracion.moneda }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Remuneración Total</div>
+        <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor }} {{ actividadAnualAnterior.actividadIndustrialComercialEmpresarial.remuneracionTotal.moneda }}</div>
+      </div>
+      
+      <div class="row white-background-wd-100">
+      <h4 class="text-left no-margin">Actividad Financiera</h4>
+      </div>
+
+      {% for actividad in actividadAnualAnterior.actividadFinanciera.actividades %}
+        {% if actividad.tipoInstrumento %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Tipo Instrumento</div>
+            <div class="column right-size text-justify text-light white-background">{{ actividad.tipoInstrumento.valor }}</div>
+          </div>
+        {% endif %}
+        {% if actividad.remuneracion %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Remuneración</div>
+            <div class="column right-size text-justify text-light white-background">{{ actividad.remuneracion.valor }} {{ actividad.remuneracion.moneda }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% if actividadAnualAnterior.actividadFinanciera.remuneracionTotal %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Remuneración Total</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.actividadFinanciera.remuneracionTotal.valor }} {{ actividadAnualAnterior.actividadFinanciera.remuneracionTotal.moneda }}</div>
+        </div>
+      {% endif %}
+
+      <div class="row white-background-wd-100">
+      <h4 class="text-left no-margin">Servicios Profesionales</h4>
+      </div>
+
+      {% for servicio in actividadAnualAnterior.serviciosProfesionales.servicios %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo Servicio</div>
+          <div class="column right-size text-justify text-light white-background">{{ servicio.tipoServicio }}</div>
+        </div>
+        {% if servicio.remuneracion %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Remuneración</div>
+            <div class="column right-size text-justify text-light white-background">{{ servicio.remuneracion.valor }} {{ servicio.remuneracion.moneda }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% if actividadAnualAnterior.serviciosProfesionales.remuneracionTotal %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Remuneración Total</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.serviciosProfesionales.remuneracionTotal.valor }} {{ actividadAnualAnterior.serviciosProfesionales.remuneracionTotal.moneda }}</div>
+        </div>
+      {% endif %}
+
+      <div class="row white-background-wd-100">
+        <h4 class="text-left no-margin">Enagenación Bienes</h4>
+      </div>
+
+      {% for bien in actividadAnualAnterior.enajenacionBienes.bienes %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo Bien Enajenado</div>
+          <div class="column right-size text-justify text-light white-background">{{ bien.tipoBienEnajenado }}</div>
+        </div>
+        {% if bien.remuneracion %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Remuneración</div>
+            <div class="column right-size text-justify text-light white-background">{{ bien.remuneracion.valor }} {{ bien.remuneracion.moneda }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% if actividadAnualAnterior.enajenacionBienes.remuneracionTotal %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Remuneración Total</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.enajenacionBienes.remuneracionTotal.valor }} {{ actividadAnualAnterior.enajenacionBienes.remuneracionTotal.moneda }}</div>
+        </div>
+      {% endif %}
+
+      <div class="row white-background-wd-100">
+        <h4 class="text-left no-margin">Otros Ingresos</h4>
+      </div>
+
+      {% for ingreso in actividadAnualAnterior.otrosIngresos.ingresos %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Tipo Ingreso</div>
+          <div class="column right-size text-justify text-light white-background">{{ ingreso.tipoIngreso }}</div>
+        </div>
+        {% if ingreso.remuneracion %}
+          <div class="row">
+            <div class="column left-size text-left blue-background">Remuneración</div>
+            <div class="column right-size text-justify text-light white-background">{{ ingreso.remuneracion.valor }} {{ ingreso.remuneracion.moneda }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% if actividadAnualAnterior.otrosIngresos.remuneracionTotal %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Remuneración Total</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.otrosIngresos.remuneracionTotal.valor }} {{ actividadAnualAnterior.otrosIngresos.remuneracionTotal.moneda }}</div>
+        </div>
+      {% endif %}
+      {% if actividadAnualAnterior.ingresoNetoAnualDeclarante %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Ingreso Neto Anual del Declarante</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.ingresoNetoAnualDeclarante.valor }} {{ actividadAnualAnterior.ingresoNetoAnualDeclarante.moneda }}</div>
+        </div>
+      {% endif %}
+      {% if actividadAnualAnterior.ingresoNetoAnualParejaDependiente %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Ingreso Neto Anual de la Pareja o Dependiente</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.ingresoNetoAnualParejaDependiente.valor }} {{ actividadAnualAnterior.ingresoNetoAnualParejaDependiente.moneda }}</div>
+        </div>
+      {% endif %}
+      {% if actividadAnualAnterior.totalIngresosNetosAnuales %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Total Ingresos Netos Anuales</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.totalIngresosNetosAnuales.valor }} {{ actividadAnualAnterior.totalIngresosNetosAnuales.moneda }}</div>
+        </div>
+      {% endif %}
+      {% if actividadAnualAnterior.aclaracionesObservaciones %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Aclaraciones/Observaciones</div>
+          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.aclaracionesObservaciones }}</div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </article>

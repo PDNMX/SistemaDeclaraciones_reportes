@@ -1,0 +1,65 @@
+ <article>
+  <h3 class="title">1. Datos Generales</h3>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Nombre</div>
+    <div class="column right-size text-justify text-light white-background">{{datosGenerales.nombre}} {{datosGenerales.primerApellido}} {% if datosGenerales.segundoApellido %} {{datosGenerales.segundoApellido}} {% endif %}</div>
+  </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background" style="width: 34%">CURP</div>
+    <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.curp}}</div>
+  </div>
+  {% if datosGenerales.rfc %}
+    <div class="row">
+      <div class="column left-size text-left blue-background" style="width: 34%">RFC</div>
+      <div class="column text-justify text-light white-background" style="width: 29%">{{datosGenerales.rfc.rfc}}</div>
+      <div class="column text-left blue-background blue-border-bottom blue-border-top" style="width: 15%">HOMOCLAVE</div>
+      <div class="column text-justify text-light white-background" style="width: 20%">{{datosGenerales.rfc.homoClave}}</div>
+    </div>
+  {% endif %}
+  {% if datosGenerales.correoElectronico %}
+    <div class="row">
+      <div class="column left-size text-left blue-background" style="width: 34%">CORREO ELECTRÓNICO INSTITUCIONAL</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.correoElectronico.institucional}}</div>
+    </div>
+    <div class="row">
+      <div class="column left-size text-left blue-background" style="width: 34%">CORREO ELECTRÓNICO PERSONAL</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.correoElectronico.personal}}</div>
+    </div>
+  {% endif %}
+  {% if datosGenerales.telefono %}
+    {% if datosGenerales.telefono.casa %}
+      <div class="row">
+        <div class="column left-size text-left blue-background" style="width: 34%">NÚMERO TELEFÓNICO DE CASA</div>
+        <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.telefono.casa}}</div>
+      </div>
+    {% endif %}
+    <div class="row">
+      <div class="column left-size text-left blue-background" style="width: 34%">NÚMERO CELULAR PERSONAL</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.telefono.celularPersonal}}</div>
+    </div>
+  {% endif %}
+  {% if datosGenerales.situacionPersonalEstadoCivil %}
+    <div class="row">
+      <div class="column left-size text-left blue-background" style="width: 34%">SITUACIÓN PERSONAL / ESTADO CIVIL</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.situacionPersonalEstadoCivil.valor}}</div>
+    </div>
+  {% endif %}
+  {% if datosGenerales.paisNacimiento %}
+    <div class="row">
+      <div class="column left-size text-left blue-background" style="width: 34%">PAÍS DE NACIMIENTO</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.paisNacimiento|countryFormat}}</div>
+    </div>
+  {% endif %}
+  {% if datosGenerales.nacionalidad %}
+    <div class="row">
+      <div class="column left-size text-left blue-background" style="width: 34%">NACIONALIDAD</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.nacionalidad}}</div>
+    </div>
+  {% endif %}
+  {% if datosGenerales.aclaracionesObservaciones %}
+    <div class="row">
+      <div class="column left-size text-left blue-background" style="width: 34%">Aclaraciones/Observaciones</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.aclaracionesObservaciones}}</div>
+    </div>
+  {% endif %}
+</article>

@@ -1,0 +1,89 @@
+<article>
+    <h3 class="title">13. Inversiones, cuentas bancarias u otro tipo de valores (situación actual)</h3>
+    {% if inversionesCuentasValores.inversion|length == 0 or inversionesCuentasValores.ninguno %}
+        <div class="column text-center">Ninguna Inversión, Cuenta Bancaria u Otro Tipo de Valores</div>
+    {% endif %}
+    {% if inversionesCuentasValores is defined %}
+        {% for item in inversionesCuentasValores.inversion %}
+            <div class="row">
+                <div class="column left-size text-left blue-background">Titular</div>
+                <div class="column right-size text-justify text-light white-background">
+                    {% for titular in item.titular%}
+                        {{titular.valor}}
+                        {% if not loop.last %}<br>{% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row white-background-wd-100">
+                <h4 class="text-left no-margin">Tercero</h4>
+            </div>
+
+               
+            {% for tercero in item.tercero%}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Nombre o Razon Social</div>
+                    <div class="column right-size text-justify text-light white-background">{{ tercero.nombreRazonSocial }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Persona</div>
+                    <div class="column right-size text-justify text-light white-background">{{ tercero.tipoPersona }}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">rfc</div>
+                    <div class="column right-size text-justify text-light white-background">{{ tercero.rfc }}</div>
+                </div>
+            {% endfor %}
+
+            {% if item.tipoInversion %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Inversión</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoInversion.valor}}</div>
+                </div>
+            {% endif %}
+            {% if item.subTipoInversion %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">subtipo Inversión</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.subTipoInversion.valor}}</div>
+                </div>
+            {% endif %}
+            <div class="row">
+                <div class="column left-size text-left blue-background">Número de Cuenta o Contrato</div>
+                <div class="column right-size text-justify text-light white-background">{{item.numeroCuentaContrato}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="column left-size text-left blue-background">Localización Inversión</div>
+                <div class="column right-size text-justify text-light white-background">{% if item.localizacionInversion.pais %} {{item.localizacionInversion.pais}} {% else %} México {% endif %}</div>
+            </div>
+            {% if item.localizacionInversion %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Institución o Razón Social</div>
+                    <div class="column right-size text-justify text-light white-background">{{ item.localizacionInversion.institucionRazonSocial }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if item.localizacionInversion.rfc %} 
+                <div class="row">
+                    <div class="column left-size text-left blue-background">rfc</div>
+                    <div class="column right-size text-justify text-light white-background">{{ item.localizacionInversion.rfc }}
+                    </div>
+                </div>
+            {% endif %}
+            {% if item.saldoSituacionActual %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background"> Saldo Situación Actual</div>
+                    <div class="column right-size text-justify text-light white-background">{{ item.saldoSituacionActual.valor }} {{ item.saldoSituacionActual.moneda }}</div>
+                </div>
+            {% endif %}
+            {% if not loop.last %}<br>{% endif %}
+        {% endfor %}
+        {% if inversionesCuentasValores.aclaracionesObservaciones %}
+          <div class="row">
+            <div class="column left-size text-left blue-background" style="width: 34%">Aclaraciones/Observaciones</div>
+            <div class="column text-justify text-light white-background" style="width: 64%">{{inversionesCuentasValores.aclaracionesObservaciones}}</div>
+          </div>
+        {% endif %}
+    {% endif %}
+</article>

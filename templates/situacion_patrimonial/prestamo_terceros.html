@@ -1,0 +1,146 @@
+<article>
+    <h3 class="title">15. Préstamos o comodato por terceros (situación actual)</h3>
+    {% if prestamoComodato.prestamo|length == 0 or prestamoComodato.ninguno %}
+        <div class="column text-center">Ningún Préstamo</div>
+    {% endif %}
+    {% if prestamoComodato is defined %}
+        {% for item in prestamoComodato.prestamo %}
+            <div class="row">
+                <div class="column left-size text-left blue-background">tipo de Bien</div>
+                <div class="column right-size text-justify text-light white-background">
+                    {% if item.tipoBien.inmueble %} Inmueble {% else %} Vehículo {% endif %}</div>
+            </div>
+            {% if item.tipoBien.inmueble and item.tipoBien.inmueble != 'null' %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Inmueble</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoBien.inmueble.tipoInmueble.valor}}</div>
+                </div>
+                {% if item.tipoBien.inmueble.domicilioMexico %}
+                    <div class="row white-background-wd-100">
+                        <h4 class="text-left no-margin">Domicilio México</h4>
+                    </div>
+    
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">CALLE</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioMexico.calle }} </div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">NÚMERO EXTERIOR</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioMexico.numeroExterior }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioMexico.numeroInterior }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioMexico.codigoPostal }}</div>
+                    </div>
+                    {% if item.tipoBien.inmueble.domicilioMexico.municipioAlcaldia %}
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">ALCALDIA</div>
+                            <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioMexico.municipioAlcaldia.valor }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.tipoBien.inmueble.domicilioMexico.entidadFederativa %}
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">ENTIDAD FEDERATIVA</div>
+                            <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioMexico.entidadFederativa.valor }}</div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if item.tipoBien.inmueble.domicilioExtranjero %}
+                    <div class="row white-background-wd-100">
+                        <h4 class="text-left no-margin">Domicilio Extranjero</h4>
+                    </div>
+    
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">CALLE</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioExtranjero.calle }} </div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">NÚMERO EXTERIOR</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioExtranjero.numeroExterior }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioExtranjero.numeroInterior }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioExtranjero.codigoPostal }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Ciudad</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioExtranjero.ciudadLocalidad }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Estado</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioExtranjero.estadoProvincia }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">País</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioExtranjero.pais|countryFormat }}</div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if item.tipoBien.vehiculo and item.tipoBien.vehiculo != 'null' %}
+                {% if item.tipoBien.vehiculo.tipo %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Vehículo</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.tipoBien.vehiculo.tipo.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">marca</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoBien.vehiculo.marca}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background"> modelo </div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoBien.vehiculo.modelo}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background"> Año </div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoBien.vehiculo.anio}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Número de Serie o Registro</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoBien.vehiculo.numeroSerieRegistro}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Lugar de Registro</div>
+                    <div class="column right-size text-justify text-light white-background">
+                        {% if item.tipoBien.vehiculo.lugarRegistro.entidadFederativa %} México {% else %} Extranjero {% endif %}</div>
+                </div>
+            {% endif %}
+
+            <div class="row white-background-wd-100">
+                <h4 class="text-left no-margin">Dueño/Titular</h4>
+            </div>
+        
+            <div class="row">
+                <div class="column left-size text-left blue-background">Nombre del dueño o titular</div>
+                <div class="column right-size text-justify text-light white-background">{{ item.duenoTitular.nombreTitular }}</div>
+            </div>
+            <div class="row">
+                <div class="column left-size text-left blue-background">Tipo Persona</div>
+                <div class="column right-size text-justify text-light white-background">{{ item.duenoTitular.tipoDuenoTitular }}</div>
+            </div>
+            <div class="row">
+                <div class="column left-size text-left blue-background">rfc</div>
+                <div class="column right-size text-justify text-light white-background">{{ item.duenoTitular.rfc }}</div>
+            </div>
+            <div class="row">
+                <div class="column left-size text-left blue-background">Relación</div>
+                <div class="column right-size text-justify text-light white-background">{{ item.duenoTitular.relacionConTitular }}</div>
+            </div>
+            {% if not loop.last %}<br>{% endif %}
+        {% endfor %}
+        {% if prestamoComodato.aclaracionesObservaciones %}
+          <div class="row">
+            <div class="column left-size text-left blue-background" style="width: 34%">Aclaraciones/Observaciones</div>
+            <div class="column text-justify text-light white-background" style="width: 64%">{{prestamoComodato.aclaracionesObservaciones}}</div>
+          </div>
+        {% endif %}
+    {% endif %}
+</article>
