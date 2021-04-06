@@ -1,5 +1,11 @@
 <article>
-  <h3 class="title">12. Bienes muebles (situación actual)</h3>
+  <h3>
+    {% if tipoDeclaracion == 'INICIAL' and tipoDeclaracion == 'MODIFICACION' %}
+        Bienes muebles (situación actual)
+    {% else %}
+        Bienes muebles
+    {% endif %}
+  </h3>
   {% if bienesMuebles.bienMueble|length == 0 or bienesMuebles.ninguno %}
     <div class="column text-center">Ningún Bien Mueble</div>
   {% endif %}
@@ -72,7 +78,7 @@
       {% endif %}
       <div class="row">
         <div class="column left-size text-left blue-background">Forma de Pago</div>
-        <div class="column right-size text-justify text-light white-background">{{item.formaPago}}</div>
+        <div class="column right-size text-justify text-light white-background">{{item.formaPago | replace('_',' ')}}</div>
       </div>
       {% if item.valorAdquisicion %}
         <div class="row">

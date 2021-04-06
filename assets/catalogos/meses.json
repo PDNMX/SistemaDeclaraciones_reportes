@@ -1,0 +1,15 @@
+[
+    { "english": "JANUARY", "spanish": "ENERO"},
+    { "english": "FEBRUARY", "spanish": "FEBRERO"},   
+    { "english": "MARCH", "spanish": "MARZO"},
+    { "english": "APRIL", "spanish": "ABRIL"},
+    { "english": "MAY", "spanish": "MAYO"},
+    { "english": "JUNE", "spanish": "JUNIO"},
+    { "english": "JULY", "spanish": "JULIO"},
+    { "english": "AUGUST", "spanish": "AGOSTO"},
+    { "english": "SEPTEMBER", "spanish": "SEPTIEMBRE"},
+    { "english": "OCTOBER", "spanish": "OCTUBRE"},
+    { "english": "NOVEMBER", "spanish": "NOVIEMBRE"},
+    { "english": "DECEMBER", "spanish": "DICIEMBRE"}
+]
+  

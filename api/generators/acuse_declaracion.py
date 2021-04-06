@@ -14,6 +14,10 @@ from weasyprint import HTML
 from api.generators.custom_filters import boolToSiNo
 from api.generators.custom_filters import countryFormat
 from api.generators.custom_filters import format_datetime
+from api.generators.custom_filters import replacePipe
+from api.generators.custom_filters import nationalityFormatPipe
+from api.generators.custom_filters import dataEmptyPipe
+from api.generators.custom_filters import dateTranslationPipe
 
 
 class AcuseDeclaracionGenerator(object):
@@ -41,6 +45,10 @@ class AcuseDeclaracionGenerator(object):
         env.filters['toSiNo'] = boolToSiNo
         env.filters['formatdatetime'] = format_datetime
         env.filters['countryFormat'] = countryFormat
+        env.filters['replace'] = replacePipe
+        env.filters['nationalityFormat'] = nationalityFormatPipe
+        env.filters['dataEmpty'] = dataEmptyPipe
+        env.filters['dateTranslation'] = dateTranslationPipe
         template = env.get_template('templates/acuse_declaracion.html')
         self.addJson()
         body_html: str = template.render(self.data)

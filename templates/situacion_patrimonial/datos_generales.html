@@ -1,8 +1,8 @@
  <article>
-  <h3 class="title">1. Datos Generales</h3>
+  <h3 class="title">Datos Generales</h3>
   <div class="row">
     <div class="column left-size text-left blue-background">Nombre</div>
-    <div class="column right-size text-justify text-light white-background">{{datosGenerales.nombre}} {{datosGenerales.primerApellido}} {% if datosGenerales.segundoApellido %} {{datosGenerales.segundoApellido}} {% endif %}</div>
+    <div class="column right-size text-justify text-light white-background">{{datosGenerales.nombre}} {{datosGenerales.primerApellido}} {{datosGenerales.segundoApellido | dataEmpty}}</div>
   </div>
   <div class="row">
     <div class="column left-size text-left blue-background" style="width: 34%">CURP</div>
@@ -19,7 +19,7 @@
   {% if datosGenerales.correoElectronico %}
     <div class="row">
       <div class="column left-size text-left blue-background" style="width: 34%">CORREO ELECTRÓNICO INSTITUCIONAL</div>
-      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.correoElectronico.institucional}}</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.correoElectronico.institucional | dataEmpty}}</div>
     </div>
     <div class="row">
       <div class="column left-size text-left blue-background" style="width: 34%">CORREO ELECTRÓNICO PERSONAL</div>
@@ -53,7 +53,7 @@
   {% if datosGenerales.nacionalidad %}
     <div class="row">
       <div class="column left-size text-left blue-background" style="width: 34%">NACIONALIDAD</div>
-      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.nacionalidad}}</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.nacionalidad | nationalityFormat}}</div>
     </div>
   {% endif %}
   {% if datosGenerales.aclaracionesObservaciones %}

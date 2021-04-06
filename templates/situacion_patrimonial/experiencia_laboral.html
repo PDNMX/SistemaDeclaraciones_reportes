@@ -1,5 +1,5 @@
 <article>
-  <h3 class="title">5. Experiencia laboral (últimos cinco empleos)</h3>
+  <h3>Experiencia laboral (últimos cinco empleos)</h3>
   {% if experienciaLaboral.experiencia|length == 0 or experienciaLaboral.ninguno %}
     <div class="column text-center">Ninguna experiencia laboral</div>
   {% endif %}
@@ -14,11 +14,11 @@
       {% if item.ambitoSector.clave == 'PUB' %}
         <div class="row">
           <div class="column left-size text-left blue-background">nivel</div>
-          <div class="column right-size text-justify text-light white-background">{{ item.nivelOrdenGobierno }}</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.nivelOrdenGobierno | replace('_', ' ') }}</div>
         </div>
         <div class="row">
           <div class="column left-size text-left blue-background">Ámbito Público</div>
-          <div class="column right-size text-justify text-light white-background">{{item.ambitoPublico}}</div>
+          <div class="column right-size text-justify text-light white-background">{{item.ambitoPublico | replace('_', ' ')}}</div>
         </div>
         <div class="row">
           <div class="column left-size text-left blue-background">Nombre del Ente Público</div>

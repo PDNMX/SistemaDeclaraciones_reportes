@@ -1,5 +1,11 @@
 <article>
-    <h3 class="title">13. Inversiones, cuentas bancarias u otro tipo de valores (situación actual)</h3>
+    <h3>
+        {% if tipoDeclaracion == 'INICIAL' or tipoDeclaracion == 'CONCLUCION' %}
+            Inversiones, cuentas bancarias u otro tipo de valores (situación actual)
+        {% else %}
+            Inversiones, cuentas bancarias u otro tipo de valores (entre el 1 de enero y 31 de diciembre del año inmediato anterior)
+        {% endif %}
+    </h3>
     {% if inversionesCuentasValores.inversion|length == 0 or inversionesCuentasValores.ninguno %}
         <div class="column text-center">Ninguna Inversión, Cuenta Bancaria u Otro Tipo de Valores</div>
     {% endif %}
@@ -73,7 +79,7 @@
             {% endif %}
             {% if item.saldoSituacionActual %}
                 <div class="row">
-                    <div class="column left-size text-left blue-background"> Saldo Situación Actual</div>
+                    <div class="column left-size text-left blue-background"> Saldo Situación al 31 de diciembre</div>
                     <div class="column right-size text-justify text-light white-background">{{ item.saldoSituacionActual.valor }} {{ item.saldoSituacionActual.moneda }}</div>
                 </div>
             {% endif %}

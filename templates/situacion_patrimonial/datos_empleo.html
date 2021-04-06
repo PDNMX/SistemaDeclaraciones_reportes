@@ -1,12 +1,12 @@
 <article>
-  <h3 class="title">4. Datos empleo, cargo o comisión que inicia</h3>
+  <h3>Datos empleo, cargo o comisión que inicia</h3>
   <div class="row">
     <div class="column left-size text-left blue-background">Nivel/Orden de Gobierno</div>
-    <div class="column right-size text-justify text-light white-background">{{ datosEmpleoCargoComision.nivelOrdenGobierno }} </div>
+    <div class="column right-size text-justify text-light white-background">{{ datosEmpleoCargoComision.nivelOrdenGobierno | replace('_', ' ') }} </div>
   </div>
   <div class="row">
     <div class="column left-size text-left blue-background">Ambito Público</div>
-    <div class="column right-size text-justify text-light white-background">{{ datosEmpleoCargoComision.ambitoPublico }}</div>
+    <div class="column right-size text-justify text-light white-background">{{ datosEmpleoCargoComision.ambitoPublico | replace('_', ' ') }}</div>
   </div>
   <div class="row">
     <div class="column left-size text-left blue-background">Nombre Ente Publico</div>
@@ -33,7 +33,7 @@
     <div class="column right-size text-justify text-light white-background">{{ datosEmpleoCargoComision.funcionPrincipal }}</div>
   </div>
   <div class="row">
-    <div class="column left-size text-left blue-background">Fecha de Toma de Posesion</div>
+    <div class="column left-size text-left blue-background">Fecha de {{ 'Toma' if tipoDeclaracion == 'INICIAL' or tipoDeclaracion == 'MODIFICACION' else 'Conclución'}} de Posesion</div>
     <div class="column right-size text-justify text-light white-background">{{ datosEmpleoCargoComision.fechaTomaPosesion|formatdatetime }}</div>
   </div>
   {% if datosEmpleoCargoComision.telefonoOficina %}
@@ -58,7 +58,7 @@
     </div>
     <div class="row">
       <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
-      <div class="column right-size text-justify text-light white-background">{{ datosEmpleoCargoComision.domicilioMexico.numeroInterior }}</div>
+      <div class="column right-size text-justify text-light white-background">{{ datosEmpleoCargoComision.domicilioMexico.numeroInterior | dataEmpty }}</div>
     </div>
     <div class="row">
       <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
@@ -95,7 +95,7 @@
             <div class="row">
                 <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
                 <div class="column right-size text-justify text-light white-background">
-                    {{ datosEmpleoCargoComision.domicilioExtranjero.numeroInterior }}</div>
+                    {{ datosEmpleoCargoComision.domicilioExtranjero.numeroInterior | dataEmpty }}</div>
             </div>
         {% endif %}
         <div class="row">

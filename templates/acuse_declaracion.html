@@ -21,12 +21,16 @@
 {% endif %}
 
   <!-- Situación patrimonial -->
-
-  {% include "templates/situacion_patrimonial.html" %}
+  <div class="situacion_patrimonial">
+    {% include "templates/situacion_patrimonial.html" %}
+  </div>
 
   <!-- Intereses -->
-
-  {% include "templates/intereses.html" %}
+  {% if not simplificada %}
+    <div class="intereses">
+      {% include "templates/intereses.html" %}
+    </div>
+  {% endif %}
   
 </body>
 

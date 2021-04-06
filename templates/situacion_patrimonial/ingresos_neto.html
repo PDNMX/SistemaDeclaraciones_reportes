@@ -1,5 +1,13 @@
 <article>
-  <h3 class="title">8. Ingresos netos del declarante, pareja y/o dependiente económicos (situación actual)</h3> 
+  <h3>
+    {% if tipoDeclaracion == 'INICIAL' %}
+      Ingresos netos del declarante, pareja y/o dependiente económicos (situación actual)
+    {% elif tipoDeclaracion == 'MODIFICACION' %}
+      Ingresos netos del declarante, pareja y/o dependiente económicos (entre el 1 de enero y 31 de diciembre del año inmediato anterior)
+    {% else %}
+      Ingresos netos del año en curso a la fecha de conclusión del empleo del declarante, pareja y/o dependiente económicos (situación actual)
+    {% endif %}
+  </h3> 
   {% if ingresos.remuneracionMensualCargoPublico %}
     <div class="row">
       <div class="column left-size text-left blue-background">Remuneracion Mensual Cargo Publico</div>
@@ -8,7 +16,7 @@
   {% endif %}
   {% if ingresos.otrosIngresosMensualesTotal %}
     <div class="row">
-      <div class="column left-size text-left blue-background">otros Ingresos Mensuales Total</div>
+      <div class="column left-size text-left blue-background">otros Ingresos {% if tipoDeclaracion == 'INICIAL' %} Mensuales {% endif %} Total</div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.otrosIngresosMensualesTotal.valor }} {{ ingresos.otrosIngresosMensualesTotal.moneda }}</div>
     </div>
   {% endif %}
@@ -125,7 +133,7 @@
   {% endif %}
   {% if ingresos.totalIngresosMensualesNetos %}
     <div class="row">
-      <div class="column left-size text-left blue-background">Total Ingresos Mensuales Netos</div>
+      <div class="column left-size text-left blue-background">Total Ingresos {% if tipoDeclaracion == 'INICIAL' %} Mensuales {% elif tipoDeclaracion == 'MODIFICACION' %} Anuales {% endif %} Netos</div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.totalIngresosMensualesNetos.valor }} {{ ingresos.totalIngresosMensualesNetos.moneda }}</div>
     </div>
   {% endif %}

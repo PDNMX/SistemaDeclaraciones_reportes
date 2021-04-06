@@ -1,5 +1,5 @@
 <article>
-  <h3 class="title">7. Datos del dependiente económico</h3>
+  <h3>Datos del dependiente económico</h3>
   {% if datosDependientesEconomicos.dependienteEconomico|length == 0 or datosDependientesEconomicos.ninguno %}
     <div class="column text-center">Ningún Dependiente Economico</div>
   {% endif %}
@@ -7,7 +7,7 @@
     {% for item in datosDependientesEconomicos.dependienteEconomico %}
       <div class="row">
         <div class="column left-size text-left blue-background">Nombre</div>
-        <div class="column right-size text-justify text-light white-background">{{item.nombre}} {{item.primerApellido}} {{item.segundoApellido}}</div>
+        <div class="column right-size text-justify text-light white-background">{{item.nombre}} {{item.primerApellido}} {{item.segundoApellido | dataEmpty}}</div>
       </div>
       <div class="row">
         <div class="column left-size text-left blue-background">fechaNacimiento</div>
@@ -37,7 +37,7 @@
       </div>
       <div class="row">
         <div class="column left-size text-left blue-background">Lugar donde reside</div>
-        <div class="column right-size text-justify text-light white-background">{{item.lugarDondeReside}}</div>
+        <div class="column right-size text-justify text-light white-background">{{item.lugarDondeReside | replace('_', ' ')}}</div>
       </div>
 
       <div class="row white-background-wd-100">
@@ -55,7 +55,7 @@
         </div>
         <div class="row">
           <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
-          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.numeroInterior }}</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.domicilioMexico.numeroInterior | dataEmpty }}</div>
         </div>
         <div class="row">
           <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
@@ -92,7 +92,7 @@
           <div class="row">
               <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
               <div class="column right-size text-justify text-light white-background">
-                  {{ item.domicilioExtranjero.numeroInterior }}</div>
+                  {{ item.domicilioExtranjero.numeroInterior | dataEmpty }}</div>
           </div>
           <div class="row">
               <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
@@ -125,11 +125,11 @@
       {% if item.actividadLaboral.clave == 'PUB' %}
         <div class="row">
           <div class="column left-size text-left blue-background">Nivel u Orden de Gobierno</div>
-          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.nivelOrdenGobierno}}</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.nivelOrdenGobierno | replace('_', ' ')}}</div>
         </div>
         <div class="row">
           <div class="column left-size text-left blue-background">Ámbito Público</div>
-          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.ambitoPublico}}</div>
+          <div class="column right-size text-justify text-light white-background">{{item.actividadLaboralSectorPublico.ambitoPublico | replace('_', ' ')}}</div>
         </div>
         <div class="row">
           <div class="column left-size text-left blue-background">Nombre del Ente Público</div>

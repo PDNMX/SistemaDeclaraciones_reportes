@@ -1,5 +1,5 @@
 <article>
-    <h3 class="title">4. Representación (hasta los 2 últimos años)</h3>
+    <h3 class="title">Representación (hasta los 2 últimos años)</h3>
     {% if representaciones.representacion|length == 0 or representaciones.ninguno %}
         <div class="column text-center">Ninguna representación</div>
     {% endif %}
@@ -7,7 +7,7 @@
         {% for item in representaciones.representacion %}
             <div class="row">
                 <div class="column left-size text-left blue-background">Tipo de Relación </div>
-                <div class="column right-size text-justify text-light white-background">{{item.tipoRelacion}}</div>
+                <div class="column right-size text-justify text-light white-background">{{item.tipoRelacion | replace('_', ' ') }}</div>
             </div>
             <div class="row">
                 <div class="column left-size text-left blue-background">Tipo Representación</div>

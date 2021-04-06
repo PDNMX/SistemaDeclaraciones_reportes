@@ -1,5 +1,5 @@
 <article>
-    <h3 class="title">3. Apoyos o beneficios públicos (hasta los 2 últimos años)</h3>
+    <h3 class="title">Apoyos o beneficios públicos (hasta los 2 últimos años)</h3>
     {% if apoyos.apoyo|length == 0 or apoyos.ninguno %}
         <div class="column text-center">Ningún Apoyo</div>
     {% endif %}
@@ -26,7 +26,7 @@
             </div>
             <div class="row">
                 <div class="column left-size text-left blue-background">Nivel u Orden de Gobierno </div>
-                <div class="column right-size text-justify text-light white-background">{{item.nivelOrdenGobierno}}</div>
+                <div class="column right-size text-justify text-light white-background">{{item.nivelOrdenGobierno | replace('_', ' ')}}</div>
             </div>
             {% if item.tipoApoyo %}
                 <div class="row">

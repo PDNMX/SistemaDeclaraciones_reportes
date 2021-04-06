@@ -1,5 +1,11 @@
 <article>
-    <h3 class="title">15. Préstamos o comodato por terceros (situación actual)</h3>
+    <h3>
+        {% if tipoDeclaracion == 'INICIAL' or tipoDeclaracion == 'CONCLUCION' %}
+            Préstamos o comodato por terceros (situación actual)
+        {% else %}
+            Préstamos o comodato por terceros (entre el 1 de enero y 31 de diciembre del año inmediato anterior)
+        {% endif %}
+    </h3>
     {% if prestamoComodato.prestamo|length == 0 or prestamoComodato.ninguno %}
         <div class="column text-center">Ningún Préstamo</div>
     {% endif %}
@@ -30,7 +36,7 @@
                     </div>
                     <div class="row">
                         <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
-                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioMexico.numeroInterior }}</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioMexico.numeroInterior | dataEmpty }}</div>
                     </div>
                     <div class="row">
                         <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
@@ -64,7 +70,7 @@
                     </div>
                     <div class="row">
                         <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
-                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioExtranjero.numeroInterior }}</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.tipoBien.inmueble.domicilioExtranjero.numeroInterior | dataEmpty }}</div>
                     </div>
                     <div class="row">
                         <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>

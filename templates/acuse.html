@@ -3,10 +3,10 @@
         {{ acuse.ente_publico }} <br>
         {{ acuse.tipo_declaracion }} {{ acuse.ejercicio }}. <br>
         ID DE DECLARACIÓN: {{ _id }} <br>
-        {{ acuse.lugar }} {{ updatedAt | formatdatetime('%d de %B de %Y') }} 
+        {{ acuse.lugar }} {{ updatedAt | formatdatetime('%d de %B de %Y') | dateTranslation }}
     </h2>
     <ul class="no-decoration mt-80px">
-        <li class="bold">C. {{datosGenerales.nombre}} {{datosGenerales.primerApellido}} {% if datosGenerales.segundoApellido %} {{datosGenerales.segundoApellido}} {% endif %}</li>
+        <li class="bold">C. {{datosGenerales.nombre}} {{datosGenerales.primerApellido}} {{datosGenerales.segundoApellido | dataEmpty}}</li>
         <li class="bold">CURP: {{datosGenerales.curp}}</li>
         <li class="bold">RFC: {% if datosGenerales.rfc %} {{datosGenerales.rfc.rfc}}{{datosGenerales.rfc.homoClave}} {% endif %}</li>
         <li class="bold">E-MAIL: {% if datosGenerales.correoElectronico %} {{datosGenerales.correoElectronico.personal}} {% endif %}</li>

@@ -9,11 +9,11 @@
 
   @top-left {
     content: string(heading);
-    width: 70%;
+    width: 73%;
     min-height: 20pt;
     margin-bottom: 15px;
     border-bottom: solid 2px #34b3eb;
-    font-size: 13pt;
+    font-size: 12pt;
     /*letter-spacing: 2px;*/
     line-height: 18pt;
     text-align: left;
@@ -31,7 +31,7 @@
     line-height: 15pt;
     text-align: right;
     font-weight: bold;
-    width: 200px;
+    width: 180px;
   }
 
   @bottom-right {
@@ -69,6 +69,7 @@
 
 html {
   box-sizing: border-box;
+  counter-reset: interesesCount section2;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -79,9 +80,16 @@ article{
 }
 html body article > h3:first-child {
   font-size: 11px;
-  string-set: heading content();
   visibility: hidden;
   position: absolute;
+}
+html body > .situacion_patrimonial > article > h3:first-child {
+  counter-increment: section2;
+  string-set: heading counter(section2) ". " content() ;
+}
+html body > .intereses > article > h3:first-child {
+  counter-increment: interesesCount;
+  string-set: heading counter(interesesCount) ". " content();
 }
 html body > #declarationType {
   font-size: 11px;
@@ -96,7 +104,7 @@ body {
   font-size: 9pt;
   color: rgba(96, 96, 96, 0.87);
   text-transform: uppercase;
-  text-align: justify
+  text-align: justify;
 }
 article{
   margin-top: 20px;

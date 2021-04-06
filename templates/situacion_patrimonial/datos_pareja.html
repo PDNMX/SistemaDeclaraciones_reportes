@@ -1,12 +1,12 @@
 <article>
-  <h3 class="title">6. Datos de la Pareja</h3>
+  <h3>Datos de la Pareja</h3>
   {% if datosPareja.ninguno %}
     <div class="column text-center">Ninguna pareja</div>
   {% endif %}
   {% if datosPareja is defined and datosPareja.ninguno == false %}
     <div class="row">
       <div class="column left-size text-left blue-background">Nombre</div>
-      <div class="column right-size text-justify text-light white-background">{{datosPareja.nombre}} {{datosPareja.primerApellido}} {{datosPareja.segundoApellido}}</div>
+      <div class="column right-size text-justify text-light white-background">{{datosPareja.nombre}} {{datosPareja.primerApellido}} {{datosPareja.segundoApellido | dataEmpty}}</div>
     </div>
     <div class="row">
       <div class="column left-size text-left blue-background">fecha de Nacimiento</div>
@@ -22,7 +22,7 @@
     </div>
     <div class="row">
       <div class="column left-size text-left blue-background">Relación con el declarante</div>
-      <div class="column right-size text-justify text-light white-background">{{datosPareja.relacionConDeclarante}}</div>
+      <div class="column right-size text-justify text-light white-background">{{datosPareja.relacionConDeclarante | replace('_', ' ')}}</div>
     </div>
     <div class="row">
       <div class="column left-size text-left blue-background">¿Es Ciudadano Extranjero?</div>
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
       <div class="column left-size text-left blue-background">Lugar donde reside</div>
-      <div class="column right-size text-justify text-light white-background">{{datosPareja.lugarDondeReside}}</div>
+      <div class="column right-size text-justify text-light white-background">{{datosPareja.lugarDondeReside | replace('_', ' ')}}</div>
     </div>
 
     {% if datosPareja.lugarDondeReside == 'MEXICO' %}
@@ -60,7 +60,7 @@
       <div class="row">
           <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
           <div class="column right-size text-justify text-light white-background">
-              {{ datosPareja.domicilioMexico.numeroInterior }}</div>
+              {{ datosPareja.domicilioMexico.numeroInterior | dataEmpty }}</div>
       </div>
       <div class="row">
           <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
@@ -106,7 +106,7 @@
       <div class="row">
           <div class="column left-size text-left blue-background">NÚMERO INTERIOR</div>
           <div class="column right-size text-justify text-light white-background">
-              {{ datosPareja.domicilioExtranjero.numeroInterior }}</div>
+              {{ datosPareja.domicilioExtranjero.numeroInterior | dataEmpty }}</div>
       </div>
       <div class="row">
           <div class="column left-size text-left blue-background">CÓDIGO POSTAL</div>
@@ -140,11 +140,11 @@
     {% if datosPareja.actividadLaboral.clave == 'PUB' %}
       <div class="row">
         <div class="column left-size text-left blue-background">Nivel u Orden de Gobierno</div>
-        <div class="column right-size text-justify text-light white-background">{{datosPareja.actividadLaboralSectorPublico.nivelOrdenGobierno}}</div>
+        <div class="column right-size text-justify text-light white-background">{{datosPareja.actividadLaboralSectorPublico.nivelOrdenGobierno | replace('_', ' ')}}</div>
       </div>
       <div class="row">
         <div class="column left-size text-left blue-background">Ámbito Público</div>
-        <div class="column right-size text-justify text-light white-background">{{datosPareja.actividadLaboralSectorPublico.ambitoPublico}}</div>
+        <div class="column right-size text-justify text-light white-background">{{datosPareja.actividadLaboralSectorPublico.ambitoPublico | replace('_', ' ')}}</div>
       </div>
       <div class="row">
         <div class="column left-size text-left blue-background">Nombre del Ente Público</div>
