@@ -43,7 +43,7 @@
     </article>
 {% endif %}
 
-{% if not simplificada %}
+{% if declaracionCompleta %}
     {% if datosPareja %}
         {% include "templates/situacion_patrimonial/datos_pareja.html" %}
     {% else %}
@@ -54,7 +54,7 @@
     {% endif %}
 {% endif %}
 
-{% if not simplificada %}
+{% if declaracionCompleta %}
     {% if datosDependientesEconomicos %}
         {% include "templates/situacion_patrimonial/datos_dependiente.html" %}
     {% else %}
@@ -94,7 +94,7 @@
 {% endif %}
 
 
-{% if not simplificada %}
+{% if declaracionCompleta %}
     {% if bienesInmuebles %}
         {% include "templates/situacion_patrimonial/bienes_inmubles.html" %}
     {% else %}
@@ -111,7 +111,7 @@
     {% endif %}
 {% endif %}
 
-{% if not simplificada %}
+{% if declaracionCompleta %}
     {% if vehiculos %}
         {% include "templates/situacion_patrimonial/vehiculos.html" %}
     {% else %}
@@ -128,7 +128,7 @@
     {% endif %}
 {% endif %}
 
-{% if not simplificada %}
+{% if declaracionCompleta %}
     {% if bienesMuebles %}
         {% include "templates/situacion_patrimonial/bienes_mubles.html" %}
     {% else %}
@@ -146,7 +146,7 @@
     {% endif %}
 {% endif %}
 
-{% if not simplificada %}
+{% if declaracionCompleta %}
     {% if inversionesCuentasValores %}
         {% include "templates/situacion_patrimonial/inversiones.html" %}
     {% else %}
@@ -163,7 +163,7 @@
     {% endif %}
 {% endif %}
 
-{% if not simplificada %}
+{% if declaracionCompleta %}
     {% if adeudosPasivos %}
         {% include "templates/situacion_patrimonial/adeudos.html" %}
     {% else %}
@@ -180,7 +180,7 @@
     {% endif %}
 {% endif %}
 
-{% if not simplificada %}
+{% if declaracionCompleta %}
     {% if prestamoComodato %}
         {% include "templates/situacion_patrimonial/prestamo_terceros.html" %}
     {% else %}
