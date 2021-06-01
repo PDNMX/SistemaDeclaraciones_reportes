@@ -1,24 +1,30 @@
 <article>
   <h3>
     {% if tipoDeclaracion == 'INICIAL' %}
-      Ingresos netos del declarante, pareja y/o dependiente económicos (situación actual)
+    Ingresos netos del declarante, pareja y/o dependiente económicos (situación actual)
     {% elif tipoDeclaracion == 'MODIFICACION' %}
-      Ingresos netos del declarante, pareja y/o dependiente económicos (entre el 1 de enero y 31 de diciembre del año inmediato anterior)
+    Ingresos netos del declarante, pareja y/o dependiente económicos (entre el 1 de enero y 31 de diciembre del año
+    inmediato anterior)
     {% else %}
-      Ingresos netos del año en curso a la fecha de conclusión del empleo del declarante, pareja y/o dependiente económicos (situación actual)
+    Ingresos netos del año en curso a la fecha de conclusión del empleo del declarante, pareja y/o dependiente
+    económicos (situación actual)
     {% endif %}
-  </h3> 
+  </h3>
   {% if ingresos.remuneracionMensualCargoPublico %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Remuneracion Mensual Cargo Publico</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.remuneracionMensualCargoPublico.valor }} {{ ingresos.remuneracionMensualCargoPublico.moneda }} </div>
-    </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Remuneracion {% if tipoDeclaracion == 'INICIAL' %} Mensual
+      {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Cargo Publico</div>
+    <div class="column right-size text-justify text-light white-background">{{
+      ingresos.remuneracionMensualCargoPublico.valor }} {{ ingresos.remuneracionMensualCargoPublico.moneda }} </div>
+  </div>
   {% endif %}
   {% if ingresos.otrosIngresosMensualesTotal %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">otros Ingresos {% if tipoDeclaracion == 'INICIAL' %} Mensuales {% endif %} Total</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.otrosIngresosMensualesTotal.valor }} {{ ingresos.otrosIngresosMensualesTotal.moneda }}</div>
-    </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">otros Ingresos {% if tipoDeclaracion == 'INICIAL' %}
+      Mensuales {% endif %} Total</div>
+    <div class="column right-size text-justify text-light white-background">{{
+      ingresos.otrosIngresosMensualesTotal.valor }} {{ ingresos.otrosIngresosMensualesTotal.moneda }}</div>
+  </div>
   {% endif %}
 
   <div class="row white-background-wd-100">
@@ -26,26 +32,29 @@
   </div>
 
   {% for actividad in ingresos.actividadIndustrialComercialEmpresarial.actividades %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Nombre de la Razón Social</div>
-      <div class="column right-size text-justify text-light white-background">{{ actividad.nombreRazonSocial }}</div>
-    </div>
-    <div class="row">
-      <div class="column left-size text-left blue-background">Tipo de Negocio</div>
-      <div class="column right-size text-justify text-light white-background">{{ actividad.tipoNegocio }}</div>
-    </div>
-    {% if actividad.remuneracion %}
-      <div class="row">
-        <div class="column left-size text-left blue-background">Remuneración</div>
-        <div class="column right-size text-justify text-light white-background">{{ actividad.remuneracion.valor }} {{ actividad.remuneracion.moneda }}</div>
-      </div>
-    {% endif %}
+  <div class="row">
+    <div class="column left-size text-left blue-background">Nombre de la Razón Social</div>
+    <div class="column right-size text-justify text-light white-background">{{ actividad.nombreRazonSocial }}</div>
+  </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Tipo de Negocio</div>
+    <div class="column right-size text-justify text-light white-background">{{ actividad.tipoNegocio }}</div>
+  </div>
+  {% if actividad.remuneracion %}
+  <div class="row">
+    <div class="column left-size text-left blue-background">Remuneración</div>
+    <div class="column right-size text-justify text-light white-background">{{ actividad.remuneracion.valor }} {{
+      actividad.remuneracion.moneda }}</div>
+  </div>
+  {% endif %}
   {% endfor %}
   {% if ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Remuneración Total</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor }} {{ ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.moneda }}</div>
-    </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Remuneración Total</div>
+    <div class="column right-size text-justify text-light white-background">{{
+      ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor }} {{
+      ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.moneda }}</div>
+  </div>
   {% endif %}
 
   <div class="row white-background-wd-100">
@@ -53,24 +62,27 @@
   </div>
 
   {% for actividad in ingresos.actividadFinanciera.actividades %}
-    {% if actividad.tipoInstrumento %}
-      <div class="row">
-        <div class="column left-size text-left blue-background">Tipo Instrumento</div>
-        <div class="column right-size text-justify text-light white-background">{{ actividad.tipoInstrumento.valor }}</div>
-      </div>
-    {% endif %}
-    {% if actividad.remuneracion %}
-      <div class="row">
-        <div class="column left-size text-left blue-background">Remuneración</div>
-        <div class="column right-size text-justify text-light white-background">{{ actividad.remuneracion.valor }} {{ actividad.remuneracion.moneda }}</div>
-      </div>
-    {% endif %}
+  {% if actividad.tipoInstrumento %}
+  <div class="row">
+    <div class="column left-size text-left blue-background">Tipo Instrumento</div>
+    <div class="column right-size text-justify text-light white-background">{{ actividad.tipoInstrumento.valor }}</div>
+  </div>
+  {% endif %}
+  {% if actividad.remuneracion %}
+  <div class="row">
+    <div class="column left-size text-left blue-background">Remuneración</div>
+    <div class="column right-size text-justify text-light white-background">{{ actividad.remuneracion.valor }} {{
+      actividad.remuneracion.moneda }}</div>
+  </div>
+  {% endif %}
   {% endfor %}
   {% if ingresos.actividadFinanciera.remuneracionTotal %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Remuneración Total</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.actividadFinanciera.remuneracionTotal.valor }} {{ ingresos.actividadFinanciera.remuneracionTotal.moneda }}</div>
-    </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Remuneración Total</div>
+    <div class="column right-size text-justify text-light white-background">{{
+      ingresos.actividadFinanciera.remuneracionTotal.valor }} {{ ingresos.actividadFinanciera.remuneracionTotal.moneda
+      }}</div>
+  </div>
   {% endif %}
 
   <div class="row white-background-wd-100">
@@ -78,22 +90,25 @@
   </div>
 
   {% for servicio in ingresos.serviciosProfesionales.servicios %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Tipo Servicio</div>
-      <div class="column right-size text-justify text-light white-background">{{ servicio.tipoServicio }}</div>
-    </div>
-    {% if servicio.remuneracion %}
-      <div class="row">
-        <div class="column left-size text-left blue-background">Remuneración</div>
-        <div class="column right-size text-justify text-light white-background">{{ servicio.remuneracion.valor }} {{ servicio.remuneracion.moneda }}</div>
-      </div>
-    {% endif %}
+  <div class="row">
+    <div class="column left-size text-left blue-background">Tipo Servicio</div>
+    <div class="column right-size text-justify text-light white-background">{{ servicio.tipoServicio }}</div>
+  </div>
+  {% if servicio.remuneracion %}
+  <div class="row">
+    <div class="column left-size text-left blue-background">Remuneración</div>
+    <div class="column right-size text-justify text-light white-background">{{ servicio.remuneracion.valor }} {{
+      servicio.remuneracion.moneda }}</div>
+  </div>
+  {% endif %}
   {% endfor %}
   {% if ingresos.serviciosProfesionales.remuneracionTotal %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Remuneración Total</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.serviciosProfesionales.remuneracionTotal.valor }} {{ ingresos.serviciosProfesionales.remuneracionTotal.moneda }}</div>
-    </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Remuneración Total</div>
+    <div class="column right-size text-justify text-light white-background">{{
+      ingresos.serviciosProfesionales.remuneracionTotal.valor }} {{
+      ingresos.serviciosProfesionales.remuneracionTotal.moneda }}</div>
+  </div>
   {% endif %}
 
   <div class="row white-background-wd-100">
@@ -101,46 +116,56 @@
   </div>
 
   {% for ingreso in ingresos.otrosIngresos.ingresos %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Tipo Ingreso</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingreso.tipoIngreso }}</div>
-    </div>
-    {% if ingreso.remuneracion %}
-      <div class="row">
-        <div class="column left-size text-left blue-background">Remuneración</div>
-        <div class="column right-size text-justify text-light white-background">{{ ingreso.remuneracion.valor }} {{ ingreso.remuneracion.moneda }}</div>
-      </div>
-    {% endif %}
+  <div class="row">
+    <div class="column left-size text-left blue-background">Tipo Ingreso</div>
+    <div class="column right-size text-justify text-light white-background">{{ ingreso.tipoIngreso }}</div>
+  </div>
+  {% if ingreso.remuneracion %}
+  <div class="row">
+    <div class="column left-size text-left blue-background">Remuneración</div>
+    <div class="column right-size text-justify text-light white-background">{{ ingreso.remuneracion.valor }} {{
+      ingreso.remuneracion.moneda }}</div>
+  </div>
+  {% endif %}
   {% endfor %}
   {% if ingresos.otrosIngresos.remuneracionTotal %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Remuneración Total</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.otrosIngresos.remuneracionTotal.valor }} {{ ingresos.otrosIngresos.remuneracionTotal.moneda }}</div>
-    </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Remuneración Total</div>
+    <div class="column right-size text-justify text-light white-background">{{
+      ingresos.otrosIngresos.remuneracionTotal.valor }} {{ ingresos.otrosIngresos.remuneracionTotal.moneda }}</div>
+  </div>
   {% endif %}
 
   {% if ingresos.ingresoMensualNetoDeclarante %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Ingreso Mensual Neto del Declarante</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.ingresoMensualNetoDeclarante.valor }} {{ ingresos.ingresoMensualNetoDeclarante.moneda }}</div>
-    </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Ingreso {% if tipoDeclaracion == 'INICIAL' %} Mensual {%
+      elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Neto del Declarante</div>
+    <div class="column right-size text-justify text-light white-background">{{
+      ingresos.ingresoMensualNetoDeclarante.valor }} {{ ingresos.ingresoMensualNetoDeclarante.moneda }}</div>
+  </div>
   {% endif %}
   {% if ingresos.ingresoMensualNetoParejaDependiente %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Ingreso Mensual Neto de la Pareja o Dependiente</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.ingresoMensualNetoParejaDependiente.valor }} {{ ingresos.ingresoMensualNetoParejaDependiente.moneda }}</div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Ingreso {% if tipoDeclaracion == 'INICIAL' %} Mensual {%
+      elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Neto de la Pareja o Dependiente</div>
+    <div class="column right-size text-justify text-light white-background">{{
+      ingresos.ingresoMensualNetoParejaDependiente.valor }} {{ ingresos.ingresoMensualNetoParejaDependiente.moneda }}
     </div>
+  </div>
   {% endif %}
   {% if ingresos.totalIngresosMensualesNetos %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Total Ingresos {% if tipoDeclaracion == 'INICIAL' %} Mensuales {% elif tipoDeclaracion == 'MODIFICACION' %} Anuales {% endif %} Netos</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.totalIngresosMensualesNetos.valor }} {{ ingresos.totalIngresosMensualesNetos.moneda }}</div>
-    </div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Total Ingresos {% if tipoDeclaracion == 'INICIAL' %}
+      Mensuales {% elif tipoDeclaracion == 'MODIFICACION' %} Anuales {% endif %} Netos</div>
+    <div class="column right-size text-justify text-light white-background">{{
+      ingresos.totalIngresosMensualesNetos.valor }} {{ ingresos.totalIngresosMensualesNetos.moneda }}</div>
+  </div>
   {% endif %}
   {% if ingresos.aclaracionesObservaciones %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Aclaraciones/Observaciones</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.aclaracionesObservaciones }}</div>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Aclaraciones/Observaciones</div>
+    <div class="column right-size text-justify text-light white-background">{{ ingresos.aclaracionesObservaciones }}
     </div>
+  </div>
   {% endif %}
 </article>
