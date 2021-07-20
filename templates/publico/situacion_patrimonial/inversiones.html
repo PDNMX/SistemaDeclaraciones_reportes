@@ -1,0 +1,75 @@
+<article>
+    <h3>
+        {% if tipoDeclaracion == 'INICIAL' or tipoDeclaracion == 'CONCLUCION' %}
+            Inversiones, cuentas bancarias u otro tipo de valores (situación actual)
+        {% else %}
+            Inversiones, cuentas bancarias u otro tipo de valores (entre el 1 de enero y 31 de diciembre del año inmediato anterior)
+        {% endif %}
+    </h3>
+    {% if inversionesCuentasValores.inversion|length == 0 or inversionesCuentasValores.ninguno %}
+        <div class="column text-center">Ninguna Inversión, Cuenta Bancaria u Otro Tipo de Valores</div>
+    {% endif %}
+    {% if inversionesCuentasValores is defined %}
+        {% for item in inversionesCuentasValores.inversion %}
+            {% if item.titular[0].valor == 'DECLARANTE' %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Titular</div>
+                    <div class="column right-size text-justify text-light white-background">{% for titular in item.titular %}{{titular.valor}}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+                </div>
+
+                {% if item.tercero and item.tercero[0].tipoPersona  == 'MORAL' %}
+                    <div class="row white-background-wd-100">
+                    <h4 class="text-left no-margin">Tercero</h4>
+                    </div>
+
+                    {% for tercero in item.tercero%}
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Nombre o Razon Social</div>
+                            <div class="column right-size text-justify text-light white-background">{{ tercero.nombreRazonSocial }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Tipo Persona</div>
+                            <div class="column right-size text-justify text-light white-background">{{ tercero.tipoPersona }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">rfc</div>
+                            <div class="column right-size text-justify text-light white-background">{{ tercero.rfc }}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if item.tipoInversion %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Inversión</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.tipoInversion.valor}}</div>
+                    </div>
+                {% endif %}
+                {% if item.subTipoInversion %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">subtipo Inversión</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.subTipoInversion.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Localización Inversión</div>
+                    <div class="column right-size text-justify text-light white-background">{% if item.localizacionInversion.pais %} {{item.localizacionInversion.pais}} {% else %} México {% endif %}</div>
+                </div>
+                {% if item.localizacionInversion %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Institución o Razón Social</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.localizacionInversion.institucionRazonSocial }}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if item.localizacionInversion.rfc %} 
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">rfc</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.localizacionInversion.rfc }}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if not loop.last %}<br>{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</article>

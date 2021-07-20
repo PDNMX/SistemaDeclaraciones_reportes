@@ -148,22 +148,10 @@
           <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.ingresoNetoAnualDeclarante.valor }} {{ actividadAnualAnterior.ingresoNetoAnualDeclarante.moneda }}</div>
         </div>
       {% endif %}
-      {% if actividadAnualAnterior.ingresoNetoAnualParejaDependiente %}
-        <div class="row">
-          <div class="column left-size text-left blue-background">Ingreso Neto Anual de la Pareja o Dependiente</div>
-          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.ingresoNetoAnualParejaDependiente.valor }} {{ actividadAnualAnterior.ingresoNetoAnualParejaDependiente.moneda }}</div>
-        </div>
-      {% endif %}
       {% if actividadAnualAnterior.totalIngresosNetosAnuales %}
         <div class="row">
           <div class="column left-size text-left blue-background">Total Ingresos Netos Anuales</div>
           <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.totalIngresosNetosAnuales.valor }} {{ actividadAnualAnterior.totalIngresosNetosAnuales.moneda }}</div>
-        </div>
-      {% endif %}
-      {% if actividadAnualAnterior.aclaracionesObservaciones %}
-        <div class="row">
-          <div class="column left-size text-left blue-background">Aclaraciones/Observaciones</div>
-          <div class="column right-size text-justify text-light white-background">{{ actividadAnualAnterior.aclaracionesObservaciones }}</div>
         </div>
       {% endif %}
     {% endif %}

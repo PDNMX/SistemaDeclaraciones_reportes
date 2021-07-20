@@ -1,0 +1,43 @@
+<article>
+  <h3>Datos curriculares del declarante</h3>
+  {% if datosCurricularesDeclarante.escolaridad|length == 0 or datosCurricularesDeclarante.ninguno %}
+    <div class="column text-center">Ningún Dato Curricular</div>
+  {% endif %}
+  {% if datosCurricularesDeclarante is defined %}
+    {% for item in datosCurricularesDeclarante.escolaridad %}
+      {% if item.nivel %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nivel</div>
+          <div class="column right-size text-justify text-light white-background">{{item.nivel.valor}}</div>
+        </div>
+      {% endif %}
+      {% if item.institucionEducativa %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Institución educativa</div>
+          <div class="column right-size text-justify text-light white-background">{{item.institucionEducativa.nombre}}</div>
+        </div>
+      {% endif %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Carrera o área de conocimiento</div>
+        <div class="column right-size text-justify text-light white-background">{{item.carreraAreaConocimiento}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">Estatus</div>
+        <div class="column right-size text-justify text-light white-background">{{item.estatus}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">Documento obtenido</div>
+        <div class="column right-size text-justify text-light white-background">{{item.documentoObtenido}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">Fecha de obtención del documento</div>
+        <div class="column right-size text-justify text-light white-background">{{item.fechaObtencion|formatdatetime}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">Lugar donde se ubica la Institución Educativa</div>
+        <div class="column right-size text-justify text-light white-background">{% if item.institucionEducativa.ubicacion == 'MX' %} En México {% elif item.institucionEducativa.ubicacion == 'EX' %} En el extranjero {% endif %}</div>
+      </div>
+      {% if not loop.last %}<br>{% endif %}
+    {% endfor %}
+  {% endif %}
+</article>

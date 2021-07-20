@@ -1,0 +1,73 @@
+<article>
+    <h3 class="title">Clientes principales (hasta los 2 últimos años)</h3>
+    {% if clientesPrincipales.cliente|length == 0 or clientesPrincipales.ninguno %}
+        <div class="column text-center">Ningún Cliente Principal</div>
+    {% endif %}
+    {% if clientesPrincipales is defined %}
+        {% for item in clientesPrincipales.cliente %}
+            {% if item.tipoRelacion == 'DECLARANTE' %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">¿Realiza alguna actividad lucrativa independiente al empleo, cargo o comisión?</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.realizaActividadLucrativa|toSiNo}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Relación</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoRelacion}}</div>
+                </div>
+                {% if item.empresa %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Nombre de la empresa o servicio que proporciona</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.empresa.nombreEmpresaServicio}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">rfc</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.empresa.rfc}}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if item.clientePrincipal and item.clientePrincipal.tipoPersona == 'MORAL' %}
+                    <div class="row white-background-wd-100">
+                        <h4 class="text-left no-margin">Cliente principal</h4>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo de Persona</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.clientePrincipal.tipoPersona}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Nombre o Razón Social</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.clientePrincipal.nombreRazonSocial}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">RFC</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.clientePrincipal.rfc}}</div>
+                    </div>
+                {% endif %}
+                {% if item.sector %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Sector</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.sector.valor}}</div>
+                    </div>
+                {% endif %}
+                {% if item.montoAproximadoGanancia %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Monto Aproximado del beneficio o Ganancia</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.montoAproximadoGanancia.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">país</div>
+                    <div class="column right-size text-justify text-light white-background">{% if item.ubicacion.pais %} {{item.ubicacion.pais|countryFormat}} {% else %} México {% endif %}</div>
+                </div>
+                {% if item.ubicacion.entidadFederativa %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Entidad Federativa</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.ubicacion.entidadFederativa.valor}}</div>
+                    </div>
+                {% endif %}
+                {% if not loop.last %}<br>{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</article>

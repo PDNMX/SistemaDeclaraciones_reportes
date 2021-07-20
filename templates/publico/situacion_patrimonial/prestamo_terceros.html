@@ -1,0 +1,57 @@
+<article>
+    <h3>
+        {% if tipoDeclaracion == 'INICIAL' or tipoDeclaracion == 'CONCLUCION' %}
+            Préstamos o comodato por terceros (situación actual)
+        {% else %}
+            Préstamos o comodato por terceros (entre el 1 de enero y 31 de diciembre del año inmediato anterior)
+        {% endif %}
+    </h3>
+    {% if prestamoComodato.prestamo|length == 0 or prestamoComodato.ninguno %}
+        <div class="column text-center">Ningún Préstamo</div>
+    {% endif %}
+    {% if prestamoComodato is defined %}
+        {% for item in prestamoComodato.prestamo %}
+            <div class="row">
+                <div class="column left-size text-left blue-background">tipo de Bien</div>
+                <div class="column right-size text-justify text-light white-background">
+                    {% if item.tipoBien.inmueble %} Inmueble {% else %} Vehículo {% endif %}</div>
+            </div>
+            {% if item.tipoBien.inmueble and item.tipoBien.inmueble != 'null' %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Inmueble</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoBien.inmueble.tipoInmueble.valor}}</div>
+                </div>
+            {% endif %}
+            {% if item.tipoBien.vehiculo and item.tipoBien.vehiculo != 'null' %}
+                {% if item.tipoBien.vehiculo.tipo %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Vehículo</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.tipoBien.vehiculo.tipo.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">marca</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoBien.vehiculo.marca}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background"> modelo </div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoBien.vehiculo.modelo}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background"> Año </div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoBien.vehiculo.anio}}</div>
+                </div>
+            {% endif %}
+            {% if item.duenoTitular.tipoDuenoTitular == 'MORAL'%}
+                <div class="row white-background-wd-100">
+                    <h4 class="text-left no-margin">Dueño/Titular</h4>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Persona</div>
+                    <div class="column right-size text-justify text-light white-background">{{ item.duenoTitular.tipoDuenoTitular }}</div>
+                </div>
+            {% endif %}
+            {% if not loop.last %}<br>{% endif %}
+        {% endfor %}
+    {% endif %}
+</article>

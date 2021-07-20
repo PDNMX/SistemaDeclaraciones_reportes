@@ -1,0 +1,86 @@
+<article>
+    <h3>
+        {% if tipoDeclaracion == 'INICIAL' or tipoDeclaracion == 'CONCLUCION' %}
+            Adeudos/Pasivos (situación actual)
+        {% else %}
+            Adeudos/Pasivos (entre el 1 de enero y 31 de diciembre del año inmediato anterior)
+        {% endif %}
+    </h3>
+    {% if adeudosPasivos.adeudo|length == 0 or adeudosPasivos.ninguno %}
+        <div class="column text-center">Ningún Adeudo</div>
+    {% endif %}
+    {% if adeudosPasivos is defined %}
+        {% for item in adeudosPasivos.adeudo %}
+            {% if item.titular[0].valor == 'DECLARANTE' %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Titular</div>
+                    <div class="column right-size text-justify text-light white-background">{% for titular in item.titular %}{{titular.valor}}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+                </div>
+
+                {% if item.tercero and item.tercero[0].tipoPersona == 'MORAL'%}
+                    <div class="row white-background-wd-100">
+                        <h4 class="text-left no-margin">Tercero</h4>
+                    </div>
+            
+                    {% for tercero in item.tercero%}
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Nombre o Razon Social</div>
+                            <div class="column right-size text-justify text-light white-background">{{ tercero.nombreRazonSocial }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Tipo Persona</div>
+                            <div class="column right-size text-justify text-light white-background">{{ tercero.tipoPersona }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">rfc</div>
+                            <div class="column right-size text-justify text-light white-background">{{ tercero.rfc }}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% if item.tipoAdeudo %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Inversión</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.tipoAdeudo.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Fecha Adquisición</div>
+                    <div class="column right-size text-justify text-light white-background">{{ item.fechaAdquisicion|formatdatetime }}
+                    </div>
+                </div>
+                {% if item.montoOriginal %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background"> Monto Original</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.montoOriginal.valor }} {{ item.montoOriginal.moneda }}</div>
+                    </div>
+                {% endif %}
+
+                {% if item.otorganteCredito and item.otorganteCredito.tipoPersona == 'MORAL'%}
+                    <div class="row white-background-wd-100">
+                        <h4 class="text-left no-margin">Otorgante del Crédito</h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Nombre Institución</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.otorganteCredito.nombreInstitucion }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Persona</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.otorganteCredito.tipoPersona }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Rfc</div>
+                        <div class="column right-size text-justify text-light white-background">{{ item.otorganteCredito.rfc }}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Localización Adeudo</div>
+                    <div class="column right-size text-justify text-light white-background">{% if item.localizacionAdeudo %} {{ item.localizacionAdeudo.pais|countryFormat }} {% else %} México {% endif %} </div>
+                </div>
+                {% if not loop.last %}<br>{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</article>

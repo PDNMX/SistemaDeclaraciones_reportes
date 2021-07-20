@@ -1,0 +1,51 @@
+<article>
+    <h3 class="title">¿Participa en la toma de decisiones de alguna de estas instituciones? (hasta los 2 últimos años)</h3>
+    {% if participacionTomaDecisiones.participacion|length == 0 or participacionTomaDecisiones.ninguno %}
+        <div class="column text-center">Ninguna participación</div>
+    {% endif %}
+    {% if participacionTomaDecisiones is defined %}
+        {% for item in participacionTomaDecisiones.participacion %}
+            {% if item.tipoRelacion == 'DECLARANTE' %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Relación</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoRelacion}}</div>
+                </div>
+                {% if item.tipoInstitucion %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Institución</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.tipoInstitucion.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Puesto Rol</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.puestoRol}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Fecha Inicio Participación </div>
+                    <div class="column right-size text-justify text-light white-background">{{item.fechaInicioParticipacion|formatdatetime}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">¿Recibe Remuneración?</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.recibeRemuneracion|toSiNo}}</div>
+                </div>
+                {% if item.recibeRemuneracion %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Monto Mensual</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.montoMensual.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">país</div>
+                    <div class="column right-size text-justify text-light white-background">{% if item.ubicacion.pais %} {{item.ubicacion.pais|countryFormat}} {% else %} México {% endif %}</div>
+                </div>
+                {% if item.ubicacion.entidadFederativa %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Entidad Federativa</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.ubicacion.entidadFederativa.valor}}</div>
+                    </div>
+                {% endif %}
+                {% if not loop.last %}<br>{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</article>
