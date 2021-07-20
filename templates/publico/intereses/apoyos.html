@@ -1,0 +1,54 @@
+<article>
+    <h3 class="title">Apoyos o beneficios públicos (hasta los 2 últimos años)</h3>
+    {% if apoyos.apoyo|length == 0 or apoyos.ninguno %}
+        <div class="column text-center">Ningún Apoyo</div>
+    {% endif %}
+    {% if apoyos is defined %}
+        {% for item in apoyos.apoyo %}
+            {% if item.beneficiarioPrograma.valor == 'DECLARANTE' or item.beneficiarioPrograma.valor == "OTRO(A)"%}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Persona</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoPersona}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Beneficiario del Programa</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.beneficiarioPrograma.valor}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Nombre del Programa</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.nombrePrograma}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Institución Otorgante</div>
+                    <div class="column right-size text-justify text-light white-background"> {{item.institucionOtorgante}} </div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Nivel u Orden de Gobierno </div>
+                    <div class="column right-size text-justify text-light white-background">{{item.nivelOrdenGobierno | replace('_', ' ')}}</div>
+                </div>
+                {% if item.tipoApoyo %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo de Apoyo </div>
+                        <div class="column right-size text-justify text-light white-background">{{item.tipoApoyo.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Forma de Recepción</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.formaRecepcion}}</div>
+                </div>
+                {% if item.montoApoyoMensual %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Monto del Apoyo Mensual</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.montoApoyoMensual.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Especificación</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.especifiqueApoyo}}</div>
+                </div>
+                {% if not loop.last %}<br>{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</article>

@@ -1,0 +1,93 @@
+<article>
+    <h3 class="title">Fideicomisos (hasta los 2 últimos años)</h3>
+    {% if fideicomisos.fideicomiso|length == 0 or fideicomisos.ninguno %}
+        <div class="column text-center">Ningún fideicomiso</div>
+    {% endif %}
+    {% if fideicomisos is defined %}
+        {% for item in fideicomisos.fideicomiso %}
+            {% if item.tipoRelacion == 'DECLARANTE' %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Relación</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoRelacion}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Fideicomiso</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoFideicomiso}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Participación</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoParticipacion}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">rfc Fideicomiso</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.rfcFideicomiso}}</div>
+                </div>
+                {% if item.fiduciario %}
+                    <div class="row white-background-wd-100">
+                        <h4 class="text-left no-margin">fiduciario</h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Nombre o Razón Social </div>
+                        <div class="column right-size text-justify text-light white-background"> {{item.fiduciario.nombreRazonSocial}} </div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">rfc </div>
+                        <div class="column right-size text-justify text-light white-background"> {{item.fiduciario.rfc}} </div>
+                    </div>
+                {% endif %}
+                {% if item.fideicomitente %}
+                    {% if item.fideicomitente.tipoPersona == 'MORAL' %}
+                        <div class="row white-background-wd-100">
+                            <h4 class="text-left no-margin">fideicomitente</h4>
+                        </div>
+
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Tipo Persona </div>
+                            <div class="column right-size text-justify text-light white-background"> {{item.fideicomitente.tipoPersona}} </div>
+                        </div>
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Nombre o Razón Social </div>
+                            <div class="column right-size text-justify text-light white-background"> {{item.fideicomitente.nombreRazonSocial}} </div>
+                        </div>
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Rfc </div>
+                            <div class="column right-size text-justify text-light white-background"> {{item.fideicomitente.rfc}} </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if item.fideicomisario %}
+                    {% if item.fideicomisario.tipoPersona == 'MORAL' %}
+                        <div class="row white-background-wd-100">
+                            <h4 class="text-left no-margin">fideicomisario</h4>
+                        </div>
+
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Tipo Persona </div>
+                            <div class="column right-size text-justify text-light white-background"> {{item.fideicomisario.tipoPersona}} </div>
+                        </div>
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Nombre o Razón Social </div>
+                            <div class="column right-size text-justify text-light white-background"> {{item.fideicomisario.nombreRazonSocial}} </div>
+                        </div>
+                        <div class="row">
+                            <div class="column left-size text-left blue-background">Rfc </div>
+                            <div class="column right-size text-justify text-light white-background"> {{item.fideicomisario.rfc}} </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if item.sector %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Sector </div>
+                        <div class="column right-size text-justify text-light white-background"> {{item.sector.valor}} </div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Lugar donde se localiza el fideicomiso</div>
+                    <div class="column right-size text-justify text-light white-background">{% if item.extranjero == 'EX' %} extranjero {% elif item.extranjero == 'MX' %} México {% endif %}</div>
+                </div>
+                {% if not loop.last %}<br>{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</article>

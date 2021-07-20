@@ -1,0 +1,75 @@
+<article>
+  <h3>Experiencia laboral (últimos cinco empleos)</h3>
+  {% if experienciaLaboral.experiencia|length == 0 or experienciaLaboral.ninguno %}
+    <div class="column text-center">Ninguna experiencia laboral</div>
+  {% endif %}
+  {% if experienciaLaboral is defined %}
+    {% for item in experienciaLaboral.experiencia %}
+      {% if item.ambitoSector %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Ambito/Sector en el que se laboral</div>
+          <div class="column right-size text-justify text-light white-background">{{item.ambitoSector.valor}}</div>
+        </div>
+      {% endif %}
+      {% if item.ambitoSector.clave == 'PUB' %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">nivel</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.nivelOrdenGobierno | replace('_', ' ') }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Ámbito Público</div>
+          <div class="column right-size text-justify text-light white-background">{{item.ambitoPublico | replace('_', ' ')}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nombre del Ente Público</div>
+          <div class="column right-size text-justify text-light white-background">{{item.nombreEntePublico}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Área de adscripción</div>
+          <div class="column right-size text-justify text-light white-background">{{item.areaAdscripcion}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Empleo Cargo o Comisión</div>
+          <div class="column right-size text-justify text-light white-background">{{item.empleoCargoComision}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Función Principal</div>
+          <div class="column right-size text-justify text-light white-background">{{item.funcionPrincipal}}</div>
+        </div>
+      {% endif %}
+      {% if item.ambitoSector.clave == 'PRV' %}
+        <div class="row">
+          <div class="column left-size text-left blue-background">Nombre Empresa, Sociedad o Asociación</div>
+          <div class="column right-size text-justify text-light white-background">{{ item.nombreEmpresaSociedadAsociacion }}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">rfc</div>
+          <div class="column right-size text-justify text-light white-background">{{item.rfc}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">área</div>
+          <div class="column right-size text-justify text-light white-background">{{item.area}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">puesto</div>
+          <div class="column right-size text-justify text-light white-background">{{item.puesto}}</div>
+        </div>
+        <div class="row">
+          <div class="column left-size text-left blue-background">Sector</div>
+          <div class="column right-size text-justify text-light white-background">{{item.sector.valor}}</div>
+        </div>
+      {% endif %}
+      <div class="row">
+        <div class="column left-size text-left blue-background">Fecha Ingreso</div>
+        <div class="column text-justify text-light white-background" style="width: 20%">{{item.fechaIngreso|formatdatetime}}</div>
+        <div class="column text-left blue-background blue-border-bottom blue-border-top" style="width: 24%">Fecha Egreso</div>
+        <div class="column text-justify text-light white-background" style="width: 20%">{{item.fechaEgreso|formatdatetime}}</div>
+      </div>
+      <div class="row">
+        <div class="column left-size text-left blue-background">ubicacion</div>
+        <div class="column right-size text-justify text-light white-background">{% if item.ubicacion == 'MX' %} En México {% elif item.ubicacion == 'EX' %} En el extranjero {% endif %}</div>
+      </div>
+      {% if not loop.last %}<br>{% endif %}
+    {% endfor %}
+  {% endif %}
+</article>

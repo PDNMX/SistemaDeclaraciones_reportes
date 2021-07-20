@@ -1,0 +1,62 @@
+<article>
+    <h3 class="title">Participación en empresas, sociedades o asociaciones (hasta los 2 últimos años)</h3>
+    {% if participacion.participacion|length == 0 or participacion.ninguno %}
+        <div class="column text-center">Ninguna participación</div>
+    {% endif %}
+    {% if participacion is defined %}
+        {% for item in participacion.participacion %}
+            {% if item.tipoRelacion == 'DECLARANTE' %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Relación</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoRelacion}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Nombre de Empresa, Sociedad o Asociación</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.nombreEmpresaSociedadAsociacion}}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">rfc</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.rfc}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Porcentaje Participación </div>
+                    <div class="column right-size text-justify text-light white-background"> {{item.porcentajeParticipacion}} </div>
+                </div>
+                {% if item.tipoParticipacion %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Participacion</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.tipoParticipacion.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">¿Recibe Remuneración? </div>
+                    <div class="column right-size text-justify text-light white-background">{{item.recibeRemuneracion|toSiNo}}</div>
+                </div>
+                {% if item.montoMensual %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Monto Mensual</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.montoMensual.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">país</div>
+                    <div class="column right-size text-justify text-light white-background">{% if item.ubicacion.pais %} {{item.ubicacion.pais|countryFormat}} {% else %} México {% endif %}</div>
+                </div>
+                {% if item.ubicacion.entidadFederativa %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Entidad Federativa</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.ubicacion.entidadFederativa.valor}}</div>
+                    </div>
+                {% endif %}
+                {% if item.sector %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Sector</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.sector.valor}}</div>
+                    </div>
+                {% endif %}
+                {% if not loop.last %}<br>{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</article>

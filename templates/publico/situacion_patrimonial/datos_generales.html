@@ -1,0 +1,13 @@
+ <article>
+  <h3 class="title">Datos Generales</h3>
+  <div class="row">
+    <div class="column left-size text-left blue-background">Nombre</div>
+    <div class="column right-size text-justify text-light white-background">{{datosGenerales.nombre}} {{datosGenerales.primerApellido}} {{datosGenerales.segundoApellido | dataEmpty}}</div>
+  </div>
+  {% if datosGenerales.correoElectronico %}
+    <div class="row">
+      <div class="column left-size text-left blue-background" style="width: 34%">CORREO ELECTRÓNICO INSTITUCIONAL</div>
+      <div class="column text-justify text-light white-background" style="width: 64%">{{datosGenerales.correoElectronico.institucional | dataEmpty}}</div>
+    </div>
+  {% endif %}
+</article>

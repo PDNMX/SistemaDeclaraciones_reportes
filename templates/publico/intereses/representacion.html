@@ -1,0 +1,66 @@
+<article>
+    <h3 class="title">Representación (hasta los 2 últimos años)</h3>
+    {% if representaciones.representacion|length == 0 or representaciones.ninguno %}
+        <div class="column text-center">Ninguna representación</div>
+    {% endif %}
+    {% if representaciones is defined %}
+        {% for item in representaciones.representacion %}
+            {% if item.tipoRelacion == 'DECLARANTE' %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo de Relación </div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoRelacion | replace('_', ' ') }}</div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Tipo Representación</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.tipoRepresentacion}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column left-size text-left blue-background">fecha de Inicio de la Representación</div>
+                    <div class="column right-size text-justify text-light white-background"> {{item.fechaInicioRepresentacion|formatdatetime}} </div>
+                </div>
+                {% if item.tipoPersona == 'MORAL' %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Persona </div>
+                        <div class="column right-size text-justify text-light white-background">{{item.tipoPersona}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Nombre o Razón Social </div>
+                        <div class="column right-size text-justify text-light white-background">{{item.nombreRazonSocial}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Rfc </div>
+                        <div class="column right-size text-justify text-light white-background">{{item.rfc}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">¿Recibe Remuneración?</div>
+                    <div class="column right-size text-justify text-light white-background">{{item.recibeRemuneracion|toSiNo}}</div>
+                </div>
+                {% if item.montoMensual %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Monto Mensual</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.montoMensual.valor}}</div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">País</div>
+                    <div class="column right-size text-justify text-light white-background">{% if item.ubicacion.pais %} {{item.ubicacion.pais}} {% else %} México {% endif %}</div>
+                </div>
+                {% if item.ubicacion.entidadFederativa %}    
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Entidad Federativa</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.ubicacion.entidadFederativa.valor}}</div>
+                    </div>
+                {% endif %}
+                {% if item.sector %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">sector</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.sector.valor}}</div>
+                    </div>
+                {% endif %}
+                {% if not loop.last %}<br>{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</article>

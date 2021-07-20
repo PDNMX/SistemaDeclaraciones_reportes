@@ -1,0 +1,67 @@
+{% if participacion %}
+    {% include "templates/publico/intereses/participacion.html" %}
+{% else %}
+  <article>
+    <h3>Participación en empresas, sociedades o asociaciones</h3>
+    <div class="text-center">Información no disponible</div>
+  </article>
+{% endif %}
+
+{% if participacionTomaDecisiones %}
+  {% include "templates/publico/intereses/participacionTomaDecisiones.html" %}
+{% else %}
+  <article>
+    <h3>¿Participa en la toma de decisiones de alguna de estas instituciones?</h3>
+    <div class="text-center">Información no disponible</div>
+  </article>
+{% endif %}
+
+
+{% if apoyos %}
+  {% include "templates/publico/intereses/apoyos.html" %}
+{% else %}
+  <article>
+    <h3>Apoyos o beneficios públicos</h3>
+    <div class="text-center">Información no disponible</div>
+  </article>
+{% endif %}
+
+
+{% if representaciones %}
+  {% include "templates/publico/intereses/representacion.html" %}
+{% else %}
+  <article>
+    <h3>Representación</h3>
+    <div class="text-center">Información no disponible</div>
+  </article>
+{% endif %}
+
+
+{% if clientesPrincipales %}
+  {% include "templates/publico/intereses/clientes_principales.html" %}
+{% else %}
+  <article>
+    <h3>Clientes principales</h3>
+    <div class="text-center">Información no disponible</div>
+  </article>
+{% endif %}
+
+
+{% if beneficiosPrivados %}
+  {% include "templates/publico/intereses/beneficios_privados.html" %}
+{% else %}
+  <article>
+    <h3>Beneficios privados</h3>
+    <div class="text-center">Información no disponible</div>
+  </article>
+{% endif %}
+
+
+{% if fideicomisos %}
+  {% include "templates/publico/intereses/fideicomisos.html" %}
+{% else %}
+  <article>
+    <h3>Fideicomisos</h3>
+    <div class="text-center">Información no disponible</div>
+  </article>
+{% endif %}

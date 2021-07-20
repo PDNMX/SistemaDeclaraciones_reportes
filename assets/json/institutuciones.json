@@ -1,0 +1,26 @@
+[
+	{
+		"ente_publico": "SECRETARÍA EJECUTIVA DEL SISTEMA ESTATAL ANTICORRUPCIÓN DEL ESTADO DE PUEBLA",
+		"clave": "SESEA PUEBLA",
+		"servidor_publico_recibe": {
+			"nombre": "Juan Perez Tellez",
+			"cargo": "Director general de Responsabilidades y Verificación Patrimonial"
+		}
+	},
+	{
+		"ente_publico": "MUNICIPIO DE VENUSTIANO CARRANZA PUEBLA",
+		"clave": "MUN VC",
+		"servidor_publico_recibe": {
+			"nombre": "Juan Perez Tellez",
+			"cargo": "Director general de Responsabilidades y Verificación Patrimonial"
+		}
+	},
+	{
+		"ente_publico": "MUNICIPIO DE JALPAN PUEBLA",
+		"clave": "MUN JALPAN",
+		"servidor_publico_recibe": {
+			"nombre": "Juan Perez Tellez",
+			"cargo": "Director general de Responsabilidades y Verificación Patrimonial"
+		}
+	}
+]

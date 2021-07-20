@@ -10,7 +10,7 @@
   </h3> 
   {% if ingresos.remuneracionMensualCargoPublico %}
     <div class="row">
-      <div class="column left-size text-left blue-background">Remuneración {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Cargo Público</div>
+      <div class="column left-size text-left blue-background">Remuneracion Mensual Cargo Publico</div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.remuneracionMensualCargoPublico.valor }} {{ ingresos.remuneracionMensualCargoPublico.moneda }} </div>
     </div>
   {% endif %}
@@ -121,26 +121,14 @@
 
   {% if ingresos.ingresoMensualNetoDeclarante %}
     <div class="row">
-      <div class="column left-size text-left blue-background">Ingreso {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Neto del Declarante</div>
+      <div class="column left-size text-left blue-background">Ingreso Mensual Neto del Declarante</div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.ingresoMensualNetoDeclarante.valor }} {{ ingresos.ingresoMensualNetoDeclarante.moneda }}</div>
-    </div>
-  {% endif %}
-  {% if ingresos.ingresoMensualNetoParejaDependiente %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Ingreso {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Neto de la Pareja o Dependiente</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.ingresoMensualNetoParejaDependiente.valor }} {{ ingresos.ingresoMensualNetoParejaDependiente.moneda }}</div>
     </div>
   {% endif %}
   {% if ingresos.totalIngresosMensualesNetos %}
     <div class="row">
       <div class="column left-size text-left blue-background">Total Ingresos {% if tipoDeclaracion == 'INICIAL' %} Mensuales {% elif tipoDeclaracion == 'MODIFICACION' %} Anuales {% endif %} Netos</div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.totalIngresosMensualesNetos.valor }} {{ ingresos.totalIngresosMensualesNetos.moneda }}</div>
-    </div>
-  {% endif %}
-  {% if ingresos.aclaracionesObservaciones %}
-    <div class="row">
-      <div class="column left-size text-left blue-background">Aclaraciones/Observaciones</div>
-      <div class="column right-size text-justify text-light white-background">{{ ingresos.aclaracionesObservaciones }}</div>
     </div>
   {% endif %}
 </article>

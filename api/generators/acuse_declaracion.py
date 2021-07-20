@@ -18,13 +18,15 @@ from api.generators.custom_filters import replacePipe
 from api.generators.custom_filters import nationalityFormatPipe
 from api.generators.custom_filters import dataEmptyPipe
 from api.generators.custom_filters import dateTranslationPipe
+from api.generators.custom_filters import replaceInstitutionPipe
 
 
 class AcuseDeclaracionGenerator(object):
-    def __init__(self, id: str, data: Dict[str, Any], preliminar: bool = False):
+    def __init__(self, id: str, data: Dict[str, Any], preliminar: bool = False, publico: bool = False):
         self.id: str = id
         self.data: Dict[str, Any] = data
         self.preliminar = preliminar
+        self.publico = publico
 
     def addJson(self):
         json_name: str
@@ -49,12 +51,18 @@ class AcuseDeclaracionGenerator(object):
         env.filters['nationalityFormat'] = nationalityFormatPipe
         env.filters['dataEmpty'] = dataEmptyPipe
         env.filters['dateTranslation'] = dateTranslationPipe
-        template = env.get_template('templates/acuse_declaracion.html')
+        env.filters['replaceInstitution'] = replaceInstitutionPipe
+        templateName = 'templates/acuse_declaracion.html'
+        if self.publico:
+            templateName = 'templates/publico/acuse_declaracion.html'
+        template = env.get_template(templateName)
         self.addJson()
         body_html: str = template.render(self.data)
         pdf_filename: str = f'reports/acuse-{self.id}.pdf'
         stylesheets: List[CSS] = [CSS(filename='styles/acuse_declaracion.css')]
         if self.preliminar:
             stylesheets.append(CSS(filename='styles/preliminar.css'))
+        if self.publico:
+            stylesheets.append(CSS(filename='styles/publico.css'))
 
         return HTML(string=body_html, encoding='utf8').write_pdf(stylesheets=stylesheets)

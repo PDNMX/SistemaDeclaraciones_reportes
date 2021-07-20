@@ -1,0 +1,64 @@
+<article>
+    <h3 class="title">Beneficios privados (hasta los 2 últimos años)</h3>
+    {% if beneficiosPrivados.beneficio|length == 0 or beneficiosPrivados.ninguno %}
+        <div class="column text-center">Ningún Beneficio Privado</div>
+    {% endif %}
+    {% if beneficiosPrivados is defined %}
+        {% for item in beneficiosPrivados.beneficio %}
+            {% if item.beneficiario[0].valor == 'DECLARANTE' and item.beneficiario|length == 1 %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Beneficiario</div>
+                    <div class="column right-size text-justify text-light white-background">{% for beneficiario in item.beneficiario %}{{beneficiario.valor}}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+                </div>
+                {% if item.tipoBeneficio %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Beneficio</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.tipoBeneficio.valor}}</div>
+                    </div>
+                {% endif %}
+
+                {% if item.otorgante and item.otorgante.tipoPersona == 'MORAL' %}
+                    <div class="row white-background-wd-100">
+                        <h4 class="text-left no-margin">Otorgante</h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Tipo Persona </div>
+                        <div class="column right-size text-justify text-light white-background"> {{item.otorgante.tipoPersona}} </div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Nombre o Razón Social </div>
+                        <div class="column right-size text-justify text-light white-background"> {{item.otorgante.nombreRazonSocial}} </div>
+                    </div>
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Rfc</div>
+                        <div class="column right-size text-justify text-light white-background"> {{item.otorgante.rfc}} </div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="column left-size text-left blue-background">Forma de Recepción </div>
+                    <div class="column right-size text-justify text-light white-background"> {{item.formaRecepcion}} </div>
+                </div>
+                {% if item.especifiqueBeneficio %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">especificación del Beneficio</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.especifiqueBeneficio}}</div>
+                    </div>
+                {% endif %}
+                {% if item.montoMensualAproximado %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">Monto Mensual Aproximado </div>
+                        <div class="column right-size text-justify text-light white-background">{{item.montoMensualAproximado.valor}} {{item.montoMensualAproximado.moneda}}</div>
+                    </div>
+                {% endif %}
+                {% if item.sector %}
+                    <div class="row">
+                        <div class="column left-size text-left blue-background">sector</div>
+                        <div class="column right-size text-justify text-light white-background">{{item.sector.valor}}</div>
+                    </div>
+                {% endif %}
+                {% if not loop.last %}<br>{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</article>
