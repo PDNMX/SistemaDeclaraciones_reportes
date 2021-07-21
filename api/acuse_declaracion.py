@@ -17,7 +17,7 @@ class AcuseDeclaracion(Resource):
         self.parser.add_argument('id', type=str, required=True, help='id is required')
         self.parser.add_argument('declaracion', type=dict, required=True, help='declaracion is required')
         self.parser.add_argument('preliminar', type=bool, required=False)
-        self.parser.add_argument('publico', type=bool, required=False)
+        self.parser.add_argument('publico', type=bool, required=False, default=False)
 
     def post(self):
         API_KEY: str = config('API_KEY', default='')
@@ -31,7 +31,7 @@ class AcuseDeclaracion(Resource):
                 id=raw_data['id'],
                 data=raw_data['declaracion'],
                 preliminar=raw_data['preliminar'],
-                publico=raw_data['publico'], 
+                publico=raw_data['publico'],
             )
 
             pdf_filename = report.make_pdf()
