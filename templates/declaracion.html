@@ -1,10 +1,11 @@
 <article>
     <h2 class="text-center">{{ declaracion.ente_publico }}</h2>
     <p class="text-center">{{ declaracion.subtitulo }} </p>
-    <p class="text-center"> {{ declaracion.tipo_declaracion }} Y {{ declaracion.ejercicio }}.
+    <p class="text-center"> {{ declaracion.tipo_declaracion }} {{ declaracion.ejercicio }}.
     </p>
     <ul class="no-decoration mt-80px">
         <li><span class="bold">ID DE DECLARACIÓN: </span>{{ _id }}</li>
+        <li><span class="bold">AÑO DEL EJERCICIO: </span>{{ anioEjercicio }}</li>
         <li><span class="bold">RFC: </span>{% if datosGenerales.rfc %} {{datosGenerales.rfc.rfc}}{{datosGenerales.rfc.homoClave}} {% endif %}</li>
         <li><span class="bold">FECHA DE RECEPCIÓN:</span> {{ updatedAt | formatdatetime }}</li>
     </ul>
