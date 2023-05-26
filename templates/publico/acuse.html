@@ -1,0 +1,24 @@
+<article>
+    <h2 class="text-center">
+        {{ acuse.ente_publico | replaceInstitution(institucion, 'ente_publico') }} <br>
+        {{ acuse.tipo_declaracion }} {{ acuse.ejercicio }}. <br>
+        ID DE DECLARACIÓN: {{ _id }} <br>
+        {{ acuse.lugar }} {{ updatedAt | formatdatetime('%d de %B de %Y') | dateTranslation }}
+    </h2>
+    <ul class="no-decoration mt-80px">
+        <li class="bold">C. {{datosGenerales.nombre}} {{datosGenerales.primerApellido}} {{datosGenerales.segundoApellido | dataEmpty}}</li>
+        <li class="bold">E-MAIL: {% if datosGenerales.correoElectronico %} {{datosGenerales.correoElectronico.institucional | dataEmpty}} {% endif %}</li>
+    </ul>
+    <h3>PRESENTE.</h3>
+    <section>
+        <p>
+            {{ acuse.texto1_cuerpo_acuse }}
+        </p>
+        <p>{{ acuse.texto2_cuerpo_acuse }}</p>
+    </section>
+    <p class="text-center">ATENTAMENTE</p>
+    <p class="text-center mt-100px">
+        {{ acuse.servidor_publico_recibe.nombre | replaceInstitution(institucion, 'nombre') }} <br>
+        {{ acuse.servidor_publico_recibe.cargo | replaceInstitution(institucion, 'cargo') }}
+    </p>
+</article>
