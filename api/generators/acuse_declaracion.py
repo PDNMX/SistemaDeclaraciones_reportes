@@ -20,7 +20,8 @@ from api.generators.custom_filters import replacePipe
 from api.generators.custom_filters import nationalityFormatPipe
 from api.generators.custom_filters import dataEmptyPipe
 from api.generators.custom_filters import dateTranslationPipe
-from api.generators.custom_filters import replaceInstitutionPipe
+from api.generators.custom_filters import restar_ano_modificacion
+
 
 
 class AcuseDeclaracionGenerator(object):
@@ -53,6 +54,7 @@ class AcuseDeclaracionGenerator(object):
         env.filters['nationalityFormat'] = nationalityFormatPipe
         env.filters['dataEmpty'] = dataEmptyPipe
         env.filters['dateTranslation'] = dateTranslationPipe
+        env.filters['restar_ano_modificacion'] = restar_ano_modificacion
 
         stylesheets: List[CSS] = [CSS(filename='styles/acuse_declaracion.css')]
 
@@ -70,7 +72,5 @@ class AcuseDeclaracionGenerator(object):
         
         if self.preliminar:
             stylesheets.append(CSS(filename='styles/preliminar.css'))
-        if self.publico:
-            stylesheets.append(CSS(filename='styles/publico.css'))
 
         return HTML(string=body_html, encoding='utf8').write_pdf(stylesheets=stylesheets)

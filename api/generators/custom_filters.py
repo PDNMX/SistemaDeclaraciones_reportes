@@ -32,10 +32,14 @@ def dateTranslationPipe(value):
     return ''
 
 def format_datetime(value, format="%d/%m/%Y"):
-    if value is None:
-        return ""
-    #return datetime.datetime.strptime(value[:10], "%Y-%m-%d").strftime(format)
-    return (datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%fZ').astimezone() - timedelta(hours=5, minutes=0)).strftime(format)
+    if(value):
+        return (datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%fZ').astimezone() - timedelta(hours=5, minutes=0)).strftime(format)
+    return ''
+
+def restar_ano_modificacion(value):
+    if(value):
+        return (datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%fZ').astimezone() - timedelta(hours=5, minutes=0, days=365)).strftime("%Y")
+    return ''
 
 def nationalityFormatPipe(value):
     if (value):
@@ -49,19 +53,4 @@ def nationalityFormatPipe(value):
 def replacePipe(value: str, strToReplace: str, replacementStr: str): 
     if (not value or not strToReplace or not replacementStr):
       return value
-    return value.replace(strToReplace, replacementStr)   
-
-def replaceInstitutionPipe(value: str, institutionKey: str, type: str):
-    if (value and institutionKey and type):
-        with open('assets/json/institutuciones.json') as file:
-            data = json.load(file)
-            for item in data:
-                if item['clave'] == institutionKey:
-                    if type == 'ente_publico':
-                        return item['ente_publico']
-                    elif type == 'nombre':
-                        return item['servidor_publico_recibe']['nombre']
-                    elif type == 'cargo':
-                        return item['servidor_publico_recibe']['cargo']
-            return value 
-    return value
+    return value.replace(strToReplace, replacementStr)

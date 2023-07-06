@@ -1,7 +1,14 @@
 <article>
     <h2 class="text-center">
-        {{ acuse.ente_publico | replaceInstitution(institucion, 'ente_publico') }} <br>
-        {{ acuse.tipo_declaracion }} {{ acuse.ejercicio }}. <br>
+        {{ acuse.ente_publico }} <br>
+        {{ acuse.tipo_declaracion }} 
+        
+        {% if tipoDeclaracion == 'MODIFICACION' %}
+        <!-- año de captura menos uno --->
+        {{ updatedAt | restar_ano_modificacion }}
+        {% else %}
+        {{ updatedAt | formatdatetime('%Y') }}
+        {% endif %}. <br>
         ID DE DECLARACIÓN: {{ _id }} <br>
         {{ acuse.lugar }} {{ updatedAt | formatdatetime('%d de %B de %Y %H:%M:%S') | dateTranslation }}
     </h2>
@@ -20,7 +27,7 @@
     </section>
     <p class="text-center">ATENTAMENTE</p>
     <p class="text-center mt-100px">
-        {{ acuse.servidor_publico_recibe.nombre | replaceInstitution(institucion, 'nombre') }} <br>
-        {{ acuse.servidor_publico_recibe.cargo | replaceInstitution(institucion, 'cargo') }}
+        {{ acuse.servidor_publico_recibe.nombre }} <br>
+        {{ acuse.servidor_publico_recibe.cargo }}
     </p>
 </article>

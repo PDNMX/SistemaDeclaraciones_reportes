@@ -18,11 +18,12 @@
   
 
 
-{% if datosGenerales%}
+{% if datosGenerales and firmada %}
   <!-- Situación patrimonial -->
 
+  
   {% include "templates/acuse.html" %}
-
+  
   <!-- Situación patrimonial -->
 
   {% include "templates/declaracion.html" %}
