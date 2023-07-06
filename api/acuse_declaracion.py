@@ -1,5 +1,5 @@
 import logging
-
+import sys
 from decouple import config
 from typing import Any
 from typing import Dict
@@ -17,7 +17,7 @@ class AcuseDeclaracion(Resource):
         self.parser.add_argument('id', type=str, required=True, help='id is required')
         self.parser.add_argument('declaracion', type=dict, required=True, help='declaracion is required')
         self.parser.add_argument('preliminar', type=bool, required=False)
-        self.parser.add_argument('publico', type=bool, required=False, default=False)
+        self.parser.add_argument('publica', type=str, required=False)
 
     def post(self):
         API_KEY: str = config('API_KEY', default='')
@@ -27,11 +27,12 @@ class AcuseDeclaracion(Resource):
 
         try:
             raw_data: Dict[str, Any] = self.parser.parse_args()
+
             report: AcuseDeclaracionGenerator = AcuseDeclaracionGenerator(
                 id=raw_data['id'],
                 data=raw_data['declaracion'],
                 preliminar=raw_data['preliminar'],
-                publico=raw_data['publico'],
+                publica=raw_data['publica'],
             )
 
             pdf_filename = report.make_pdf()

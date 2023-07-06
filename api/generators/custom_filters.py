@@ -1,7 +1,7 @@
 import assets.catalogos
 import datetime
 import json
-from pytz import timezone
+from datetime import datetime, timedelta
 
 def boolToSiNo(value):
     if (value):
@@ -34,9 +34,8 @@ def dateTranslationPipe(value):
 def format_datetime(value, format="%d/%m/%Y"):
     if value is None:
         return ""
-    new_date =  datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%fZ")
-    return new_date.astimezone(  timezone('America/Mexico_City')  ).strftime(format)
-    # return datetime.datetime.strptime(value[:10], "%Y-%m-%d").strftime(format)
+    #return datetime.datetime.strptime(value[:10], "%Y-%m-%d").strftime(format)
+    return (datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%fZ').astimezone() - timedelta(hours=5, minutes=0)).strftime(format)
 
 def nationalityFormatPipe(value):
     if (value):

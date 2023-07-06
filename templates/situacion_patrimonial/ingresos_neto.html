@@ -10,7 +10,9 @@
   </h3> 
   {% if ingresos.remuneracionMensualCargoPublico %}
     <div class="row">
-      <div class="column left-size text-left blue-background">Remuneración {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Cargo Público</div>
+      <div class="column left-size text-left blue-background">
+        Remuneracion {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% else %} Acumulada a la fecha de conclusión de {% endif %} Cargo Publico
+      </div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.remuneracionMensualCargoPublico.valor }} {{ ingresos.remuneracionMensualCargoPublico.moneda }} </div>
     </div>
   {% endif %}
@@ -121,13 +123,24 @@
 
   {% if ingresos.ingresoMensualNetoDeclarante %}
     <div class="row">
-      <div class="column left-size text-left blue-background">Ingreso {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Neto del Declarante</div>
+      <div class="column left-size text-left blue-background">
+        Remuneracion {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% else %} Acumulada a la fecha de conclusión de {% endif %} Cargo Publico
+      </div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.ingresoMensualNetoDeclarante.valor }} {{ ingresos.ingresoMensualNetoDeclarante.moneda }}</div>
     </div>
   {% endif %}
   {% if ingresos.ingresoMensualNetoParejaDependiente %}
     <div class="row">
-      <div class="column left-size text-left blue-background">Ingreso {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Neto de la Pareja o Dependiente</div>
+      <div class="column left-size text-left blue-background">
+        Ingreso 
+          {% if tipoDeclaracion == 'INICIAL' %} 
+          Mensual neto del cónyugue, pareja o dependiente económico
+          {% elif tipoDeclaracion == 'MODIFICACION' %} 
+          Anual neto del cónyugue, pareja o dependiente económico
+          {% else %} 
+          Acumulado a la fecha de conclusión del encargo
+          {% endif %} 
+      </div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.ingresoMensualNetoParejaDependiente.valor }} {{ ingresos.ingresoMensualNetoParejaDependiente.moneda }}</div>
     </div>
   {% endif %}

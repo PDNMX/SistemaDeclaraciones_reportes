@@ -1,5 +1,7 @@
 import requests
 import json
+import logging
+import sys
 
 from datetime import datetime
 from typing import Any
@@ -22,11 +24,11 @@ from api.generators.custom_filters import replaceInstitutionPipe
 
 
 class AcuseDeclaracionGenerator(object):
-    def __init__(self, id: str, data: Dict[str, Any], preliminar: bool = False, publico: bool = False):
+    def __init__(self, id: str, data: Dict[str, Any], preliminar: bool = False, publica: str = "false"):
         self.id: str = id
         self.data: Dict[str, Any] = data
         self.preliminar = preliminar
-        self.publico = publico
+        self.publica = publica
 
     def addJson(self):
         json_name: str
@@ -51,15 +53,21 @@ class AcuseDeclaracionGenerator(object):
         env.filters['nationalityFormat'] = nationalityFormatPipe
         env.filters['dataEmpty'] = dataEmptyPipe
         env.filters['dateTranslation'] = dateTranslationPipe
-        env.filters['replaceInstitution'] = replaceInstitutionPipe
-        templateName = 'templates/acuse_declaracion.html'
-        if self.publico:
-            templateName = 'templates/publico/acuse_declaracion.html'
-        template = env.get_template(templateName)
+
+        stylesheets: List[CSS] = [CSS(filename='styles/acuse_declaracion.css')]
+
+        if self.publica == "true":
+            template = env.get_template('templates/publica.html')
+            stylesheets.append(CSS(filename='styles/declaracion_publica.css'))
+        else:
+            template = env.get_template('templates/acuse_declaracion.html')
+
+        template.globals['now'] = datetime.utcnow().strftime("%d/%m/%Y")
+
         self.addJson()
         body_html: str = template.render(self.data)
         pdf_filename: str = f'reports/acuse-{self.id}.pdf'
-        stylesheets: List[CSS] = [CSS(filename='styles/acuse_declaracion.css')]
+        
         if self.preliminar:
             stylesheets.append(CSS(filename='styles/preliminar.css'))
         if self.publico:

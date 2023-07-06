@@ -9,7 +9,7 @@ from api.acuse_declaracion import AcuseDeclaracion
 
 class App:
     def __init__(self):
-        self.port: int = config('PORT', default=3001, cast=int)
+        self.port: int = config('PORT', default=3010, cast=int)
         self.app: Flask = Flask(__name__)
         self.api: Api = Api(self.app)
         self._setup()

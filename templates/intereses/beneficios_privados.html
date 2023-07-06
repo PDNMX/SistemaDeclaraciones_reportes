@@ -7,7 +7,7 @@
         {% for item in beneficiosPrivados.beneficio %}
             <div class="row">
                 <div class="column left-size text-left blue-background">Beneficiario</div>
-                <div class="column right-size text-justify text-light white-background">{% for beneficiario in item.beneficiario %}{{beneficiario.valor}}{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+                <div class="column right-size text-justify text-light white-background">{{item.beneficiario.valor}}</div>
             </div>
             {% if item.tipoBeneficio %}
                 <div class="row">

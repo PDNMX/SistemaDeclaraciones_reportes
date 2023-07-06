@@ -1,0 +1,89 @@
+body {
+    font-size: 8pt !important;
+}
+
+h2 {
+    font-size: 10pt !important;
+    margin:0 0 6pt 0;
+}
+
+h3 {
+    font-size: 8pt !important;
+    margin:0 0 6pt 0;
+}
+
+.titulo{
+    background-color: gainsboro;
+    font-weight: bold;
+}
+
+div.campos {
+    display: flex;
+}
+
+div.campo{
+    flex-grow: 1;
+    justify-content: space-between;
+    margin: 7px 5px;
+}
+
+.campos .campo label {
+    display: block;
+    font-weight: bold;
+}
+
+span.valor{
+    display: block;
+    
+    padding: 0 4px;
+    border-bottom: solid 1px black;
+}
+
+
+.firma {
+    text-align:center;
+    font-weight: bold;
+    margin:10px 0;
+    
+}
+
+.firma .nombre {
+    width: 50%;
+    display: inline-block;
+    border-bottom: solid 1px black;
+}
+
+.firma .acepto {
+    display: inline-block;
+    margin-left: 2em;
+}
+
+.titulo-principal {
+    text-align: center;
+    display: inline-block;
+}
+
+.campos-inline label {
+    font-weight: bold;
+    display: block;
+}
+
+.logo{
+    display: inline-block;
+    width: 100px;
+    height: 60px;
+    background-image: url(../assets/pdn.png);
+    background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    margin-right: 1em;
+}
+
+.cuadro-acepto {
+    width: 1em;
+    height: 1em;
+    border: solid 1px black;
+    display: inline-block;
+    margin-left: 1em;
+    
+}

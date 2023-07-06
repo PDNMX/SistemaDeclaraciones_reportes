@@ -7,7 +7,16 @@
 </head>
 
 <body>
-  <span id="declarationType">Declaración {{ tipoDeclaracion | replace('MODIFICACION','MODIFICACIÓN') | replace('CONCLUSION','CONCLUSIÓN') }}</span>
+  <span id="declarationType">Declaración {{ tipoDeclaracion }} {% if declaracionCompleta %}
+    COMPLETA
+  {% else %}
+    SIMPLIFICADA
+  {% endif %}
+  </span>
+  
+    
+  
+
 
 {% if datosGenerales%}
   <!-- Situación patrimonial -->

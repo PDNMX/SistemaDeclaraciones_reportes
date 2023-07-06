@@ -1,0 +1,1601 @@
+<!--AGREGADO POR OMAR -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Declaración pública</title>
+</head>
+<body>
+    
+    <div>
+        <div class="logo" ></div>
+        <h2 class="titulo-principal">
+            {{ acuse.ente_publico }}<br>Declaración de situación patrimonial y de intereses, <br>
+            {{ acuse.tipo_declaracion }}, 
+            {% if declaracionCompleta %}
+                COMPLETA
+            {% else %}
+                SIMPLIFICADA
+            {% endif %}
+            <br>
+            ({{ updatedAt | formatdatetime('%d de %B de %Y %H:%M:%S') | dateTranslation }})
+            <br>Versión pública 
+        </h2>
+    </div>
+
+    <h2 class="titulo">C. Titular del Órgano Interno de Control</h2>
+    <p>
+    BAJO PROTESTA DE DECIR VERDAD, PRESENTO A USTED MI DECLARACION PATRIMONIAL Y DE INTERESES, 
+    CONFORME A LO DISPUESTO EN LA CONSTITUCIÓN POLÍTICA DE LOS ESTADOS UNIDOS MEXICANOS, 
+    EN LA LEY GENERAL DE RESPONSABILIDADES ADMINISTRATIVAS, EN LA LEY GENERAL DEL SISTEMA NACIONAL ANTICORRUPCION 
+    Y EN LA NORMATIVIDAD APLICABLE.
+    </p>
+    <h2 class="titulo">I. Declaración de Situación Patrimonial y de Intereses</h2>
+
+    <h3 class="titulo">1. Datos generales</h3>
+    {% if datosGenerales is defined %}
+    <div class="campos">
+        <div class="campo">
+            <label class="">Nombre(s)</label>
+            <span class="valor">{{ datosGenerales.nombre }}</span>
+        </div>
+        <div class="campo">
+            <label class="campo">Primer apellido</label>
+            <span class="valor">{{datosGenerales.primerApellido}}</span>
+        </div>
+        <div class="campo">
+            <label class="campo">Segundo apellido</label>
+            <span class="valor">{{ datosGenerales.segundoApellido }}</span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label class="campo">Correo electrónico institucional</label>
+            <span class="valor">{{ datosGenerales.correoElectronico.institucional }}</span>
+        </div>
+    </div>
+    {% endif %}
+
+    <h3 class="titulo">3. Datos curriculares del declarante</h3>
+    {% if datosCurricularesDeclarante is defined %}
+    {% for e in datosCurricularesDeclarante.escolaridad %}
+    {% if e is defined and e != None %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Nivel</label>
+            <span class="valor">{{ e.nivel.valor }}</span>
+        </div>
+        <div class="campo">
+            <label for="">Estatus</label>
+            <span class="valor">{{ e.estatus }}</span>
+        </div>
+        <div class="campo">
+            <label for="">Documento obtenido</label>
+            <span class="valor">{{ e.documentoObtenido }}</span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Institución educativa</label>
+            <span class="valor">{{e.institucionEducativa.nombre}}</span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">Carrera o área de conocimiento</label>
+            <span class="valor">{{e.carreraAreaConocimiento}}</span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">Fecha de obtención del documento</label>
+            <span class="valor">{{ e.fechaObtencion | formatdatetime }}</span>
+        </div>
+        <div class="campo">
+            <label for="">Lugar donde se ubica la institución educativa</label>
+            <span class="valor">{% if e.institucionEducativa.ubicacion == 'MX' %} En México {% elif e.institucionEducativa.ubicacion == 'EX' %} En el extranjero {% endif %}</span>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    <h3 class="titulo">4. Datos del empleo, cargo o comisión actual</h3>
+
+    {% if datosEmpleoCargoComision is defined %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Nivel/Orden de gobierno</label>
+            <span class="valor">{{ datosEmpleoCargoComision.nivelOrdenGobierno }}</span>
+        </div>
+        <div class="campo">
+            <label for="">Ámbito público</label>
+            <span class="valor">{{ datosEmpleoCargoComision.ambitoPublico }}</span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Nombre del Ente Público</label>
+            <span class="valor">{{datosEmpleoCargoComision.nombreEntePublico}}</span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Área de adscripción</label>
+            <span class="valor">{{datosEmpleoCargoComision.areaAdscripcion}}</span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Empleo, cargo o comisión</label>
+            <span class="valor">{{datosEmpleoCargoComision.empleoCargoComision}}</span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">¿Está contratado por honorarios?</label>
+            <span class="valor">
+                {% if datosEmpleoCargoComision.contratadoPorHonorarios == true %} Sí {% else %} No {% endif %}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">Nivel de empleo, cargo o comisión</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.nivelEmpleoCargoComision }}
+            </span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">Especifique su función principal</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.funcionPrincipal }}
+            </span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">Fecha de toma de posesión del empleo, cargo o comisión</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.fechaTomaPosesion | formatdatetime }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Teléfono de oficina</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.telefonoOficina.telefono }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Extensión</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.telefonoOficina.extension }}
+            </span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">Domicilio del empleo, cargo o comisión</label>
+            <span class="valor">
+                En México
+            </span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">Calle</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.domicilioMexico.calle }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Número exterior</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.domicilioMexico.numeroExterior }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Número interior</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.domicilioMexico.numeroInterior }}
+            </span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Colonia</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.domicilioMexico.coloniaLocalidad }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Municipio</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.domicilioMexico.municipioAlcaldia.valor }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Entidad federativa</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.domicilioMexico.entidadFederativa.valor }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Código postal</label>
+            <span class="valor">
+                {{ datosEmpleoCargoComision.domicilioMexico.codigoPostal }}
+            </span>
+        </div>
+    </div>
+    {% endif %}
+    <h3 class="titulo">5. Experiencia laboral (últimos cinco empleos)</h3>
+
+    {% if experienciaLaboral is defined %}
+    {% for e in experienciaLaboral.experiencia %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">ÁMBITO/SECTOR EN EL QUE LABORASTE</label>
+            <span class="valor">
+                {{ e.ambitoSector.valor }}
+            </span>
+        </div>
+        {% if e.ambitoSector.clave == 'PUB' %}
+        <div class="campo">
+            <label for="">NIVEL/ORDEN DE GOBIERNO</label>
+            <span class="valor">
+                {{ e.nivelOrdenGobierno }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">ÁMBITO PÚBLICO</label>
+            <span class="valor">
+                {{ e.ambitoPublico }}
+            </span>
+        </div>
+        {% endif %}
+    </div>
+    {% if e.ambitoSector.clave == 'PUB' %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">EMPLEO CARGO O COMISIÓN</label>
+            <span class="valor">
+                {{ e.empleoCargoComision }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">NOMBRE DEL ENTE PÚBLICO / NOMBRE DE LA EMPRESA</label>
+            <span class="valor">
+                {{ e.nombreEntePublico }}
+            </span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">ÁREA DE ADSCRIPCIÓN</label>
+            <span class="valor">
+                {{ e.areaAdscripcion }}
+            </span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">FUNCIÓN PRINCIPAL</label>
+            <span class="valor">
+                {{ e.funcionPrincipal }}
+            </span>
+        </div>
+    </div>
+    {% else %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">NOMBRE DE LA EMPRESA, SOCIEDAD O ASOCIACI&Oacute;N</label>
+            <span class="valor">
+                {{ e.nombreEmpresaSociedadAsociacion }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">SECTOR AL QUE PERTENECE</label>
+            <span class="valor">
+                {{ e.sector.valor }}
+            </span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">PUESTO</label>
+            <span class="valor">
+                {{ e.puesto }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">ÁREA</label>
+            <span class="valor">
+                {{ e.area }}
+            </span>
+        </div>
+    </div>
+    {% endif %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">FECHA DE INGRESO</label>
+            <span class="valor">
+                {{ e.fechaIngreso | formatdatetime }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">FECHA DE EGRESO</label>
+            <span class="valor">
+                {{ e.fechaEgreso | formatdatetime }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">LUGAR DONDE SE UBICA</label>
+            <span class="valor">
+                {% if e.ubicacion == 'MX' %} EN MÉXICO {% else %} EN EL EXTRANJERO {% endif %}
+            </span>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    {% endif %}
+
+    <h3 class="titulo">
+        {% if declaracionCompleta == true %}
+        8
+        {%else%}
+        6
+        {%endif%}
+         .  INGRESOS NETOS DEL DECLARANTE, PAREJA Y / O DEPENDIENTES ECONÓMICOS (ENTRE EL 1 DE ENERO Y 31 DE DICIEMBRE DEL AÑO INMEDIATO ANTERIOR)</h3>
+    {% if ingresos is defined %}
+    <div>
+        Los datos de la pareja, dependientes económicos y terceros no serán públicos.
+    </div>
+    <div class="campos-inline">
+        <div class="campo">
+            <label for="">I.- REMUNERACIÓN ANUAL NETA DEL DECLARANTE POR SU CARGO PÚBLICO (POR CONCEPTO DE SUELDOS, HONORARIOS,
+                COMPENSACIONES, BONOS, AGUINALDOS Y OTRAS PRESTACIONES) (CANTIDADES NETAS DESPUÉS DE IMPUESTOS)</label>
+            <span class="valor">
+                {{ ingresos.remuneracionMensualCargoPublico.valor }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">II.- OTROS INGRESOS DEL DECLARANTE</label>
+        </div>
+
+        <div class="campo">
+            <label for="">II.1.- POR ACTIVIDAD INDUSTRIAL, COMERCIAL Y/O EMPRESARIAL (DESPUÉS DE IMPUESTOS)</label>
+            <span class="valor">
+                {{ ingresos.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">II.2.- POR ACTIVIDAD FINANCIERA (RENDIMIENTOS O GANANCIAS) (DESPUÉS DE IMPUESTOS)</label>
+            <span class="valor">
+                {{ ingresos.actividadFinanciera.remuneracionTotal.valor }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">II.3.- POR SERVICIOS PROFESIONALES, CONSEJOS, CONSULTORÍAS Y / O ASESORÍAS (DESPUÉS DE IMPUESTOS)</label>
+            <span class="valor">
+                {{ ingresos.serviciosProfesionales.remuneracionTotal.valor }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">II.4 - OTROS INGRESOS NO CONSIDERADOS ANTERIORMENTE (DESPUÉS DE IMPUESTOS) </label>
+            <span class="valor">
+                {{ ingresos.otrosIngresos.remuneracionTotal.valor }}
+            </span>
+        </div>
+    </div>
+    <!-- <div class="campos-inline">
+        <div class="campo">
+            <label for="">A.- INGRESO ANUAL NETO DEL DECLARANTE </label>
+            <span class="valor">
+                {{ ingresos.ingresoMensualNetoDeclarante.valor }}
+            </span>
+        </div>
+    </div> -->
+    {% endif %}
+<!----------------------------------------------------------------------------------->
+    {% if declaracionCompleta == true %}
+    <h3 class="titulo">9. ¿Te desempeñaste como servidor público en el año inmediato anterior?</h3>
+    <p>Los datos de terceros, siempre y cuando sean personas físicas, no serán públicos. 
+    </p>
+    {% if actividadAnualAnterior is defined and actividadAnualAnterior.servidorPublicoAnioAnterior == true %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Fecha de ingreso</label>
+            <span class="valor">
+                {{ actividadAnualAnterior.fechaIngreso | formatdatetime}}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Fecha de conclusión</label>
+            <span class="valor">
+                {{ actividadAnualAnterior.fechaConclusion | formatdatetime }}%
+            </span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Remuneración neta del declarante, recibida durante el tiempo en el que se desempeñó como servidor público en el año inmediato anterior (por concepto de sueldos, honorarios, compensaciones, bonos, aguinaldos y otras prestaciones)(cantidades netas después de impuestos) </label>
+            <span class="valor">
+                ${{ actividadAnualAnterior.remuneracionNetaCargoPublico.valor }}
+                 {{ actividadAnualAnterior.remuneracionNetaCargoPublico.moneda }}
+            </span>
+        </div>
+    </div>
+    
+    <h4>II. Otros ingresos del declarante, recibidos durante el tiempo en el que se desempeñó como servidor público en el año inmediato anterior</h4>
+
+    <h5>II.1. Por actividad industrial, comercial y/o empresarial (después de impuestos)</h5>
+    {% if actividadAnualAnterior.actividadIndustrialComercialEmpresarial is defined and actividadAnualAnterior.actividadIndustrialComercialEmpresarial.actividades|length > 0 %}
+    <div><strong>Total:  
+        ${{actividadAnualAnterior.actividadIndustrialComercialEmpresarial.remuneracionTotal.valor}} 
+        {{actividadAnualAnterior.actividadIndustrialComercialEmpresarial.remuneracionTotal.moneda}}
+    </strong></div>
+    {%for a in actividadAnualAnterior.actividadIndustrialComercialEmpresarial.actividades %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Monto</label>
+            <span class="valor">
+                ${{ a.remuneracion.valor }}
+                 {{ a.remuneracion.moneda }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Nombre o Razón Social</label>
+            <span class="valor">
+                {{ a.nombreRazonSocial }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Tipo de negocio</label>
+            <span class="valor">
+                {{ a.tipoNegocio }}
+            </span>
+        </div>
+    </div>
+    {%endfor%}<!-- actividades -->
+    {%else%} <!-- si hay actividades registradas -->
+    <div>No hay registros</div>
+    {%endif%}<!-- si hay actividades registradas -->
+
+    <h5>II.2. Por actividad financiera (rendimientos o ganancias)(después de impuestos)</h5>
+    {% if actividadAnualAnterior.actividadFinanciera is defined and actividadAnualAnterior.actividadFinanciera.actividades|length > 0 %}
+    <div><strong>Total:  
+        ${{actividadAnualAnterior.actividadFinanciera.remuneracionTotal.valor}} 
+        {{actividadAnualAnterior.actividadFinanciera.remuneracionTotal.moneda}}
+    </strong></div>
+    {%for a in actividadAnualAnterior.actividadFinanciera.actividades %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Monto</label>
+            <span class="valor">
+                ${{ a.remuneracion.valor }}
+                 {{ a.remuneracion.moneda }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Tipo de instrumento</label>
+            <span class="valor">
+                {{ a.tipoInstrumento.valor }}
+            </span>
+        </div>
+    </div>
+    {%endfor%}<!-- actividades -->
+    {%else%} <!-- si hay actividades registradas -->
+    <div>No hay registros</div>
+    {%endif%}<!-- si hay actividades registradas -->
+
+
+    <h5>II.3. Por servicios profesionales, consejos, consultorías y/o asesorías (después de impuestos) </h5>
+    {% if actividadAnualAnterior.serviciosProfesionales is defined and actividadAnualAnterior.serviciosProfesionales.servicios|length > 0 %}
+    <div><strong>Total:  
+        ${{actividadAnualAnterior.serviciosProfesionales.remuneracionTotal.valor}} 
+        {{actividadAnualAnterior.serviciosProfesionales.remuneracionTotal.moneda}}
+    </strong></div>
+    {%for a in actividadAnualAnterior.serviciosProfesionales.servicios %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Monto</label>
+            <span class="valor">
+                ${{ a.remuneracion.valor }}
+                 {{ a.remuneracion.moneda }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Tipo de servicio</label>
+            <span class="valor">
+                {{ a.tipoServicio }}
+            </span>
+        </div>
+    </div>
+    {%endfor%}<!-- actividades -->
+    {%else%} <!-- si hay actividades registradas -->
+    <div>No hay registros</div>
+    {%endif%}<!-- si hay actividades registradas -->
+
+
+    <h5>II.4. Por enajenación de bienes (después de impuestos)</h5>
+    {% if actividadAnualAnterior.enajenacionBienes is defined and actividadAnualAnterior.enajenacionBienes.bienes|length > 0 %}
+    <div><strong>Total:  
+        ${{actividadAnualAnterior.enajenacionBienes.remuneracionTotal.valor}} 
+        {{actividadAnualAnterior.enajenacionBienes.remuneracionTotal.moneda}}
+    </strong></div>
+    {%for a in actividadAnualAnterior.enajenacionBienes.bienes %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Monto</label>
+            <span class="valor">
+                ${{ a.remuneracion.valor }}
+                 {{ a.remuneracion.moneda }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Tipo de bien</label>
+            <span class="valor">
+                {{ a.tipoBienEnajenado }}
+            </span>
+        </div>
+    </div>
+    {%endfor%}<!-- actividades -->
+    {%else%} <!-- si hay actividades registradas -->
+    <div>No hay registros</div>
+    {%endif%}<!-- si hay actividades registradas -->
+
+    <h5>II.5. Otros ingresos no considerados a los anteriores (después de impuestos)</h5>
+    {% if actividadAnualAnterior.otrosIngresos is defined and actividadAnualAnterior.otrosIngresos.ingresos|length > 0 %}
+    <div><strong>Total:  
+        ${{actividadAnualAnterior.otrosIngresos.remuneracionTotal.valor}} 
+        {{actividadAnualAnterior.otrosIngresos.remuneracionTotal.moneda}}
+    </strong></div>
+    {%for a in actividadAnualAnterior.otrosIngresos.ingresos %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Monto</label>
+            <span class="valor">
+                ${{ a.remuneracion.valor }}
+                 {{ a.remuneracion.moneda }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Tipo de ingreso</label>
+            <span class="valor">
+                {{ a.tipoIngreso }}
+            </span>
+        </div>
+    </div>
+    {%endfor%}<!-- actividades -->
+    {%else%} <!-- si hay actividades registradas -->
+    <div>No hay registros</div>
+    {%endif%}<!-- si hay actividades registradas -->
+
+
+    {% else %}
+    <div>No hay registros</div>
+    {% endif %}<!-- del punto  -->
+
+<!---------------------------------------------------->
+
+    <h3 class="titulo">10. Bienes inmuebles</h3>
+    <p>Todos los datos de los bienes inmuebles nombre de la pareja,
+        dependientes económicos y/o terceros o que sean en copropiedad con el declarante no serán públicos.
+    </p>
+    {% if bienesInmuebles is defined %}
+    {% for v in bienesInmuebles.bienInmueble %}
+    {% if v.titular[0].clave == 'DEC' %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo de inmueble</label>
+            <span class="valor">
+                {{ v.tipoInmueble.valor }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Porcentaje de propiedad del declarante conforme a escrituración o contrato</label>
+            <span class="valor">
+                {{ v.porcentajePropiedad }}%
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Superficie del terreno</label>
+            <span class="valor">
+                {{ v.superficieTerreno.valor }}
+                {{ v.superficieTerreno.unidad }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Superficie de construcción</label>
+            <span class="valor">
+                {{ v.superficieConstruccion.valor }}
+                {{ v.superficieConstruccion.unidad }}
+            </span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">Forma de adquisición</label>
+            <span class="valor">
+                {{ v.formaAdquisicion.valor }}
+            </span>
+        </div>
+        
+        <div class="campo">
+            <label for="">Forma de pago</label>
+            <span class="valor">
+                {{ v.formaPago }}
+            </span>
+        </div>
+
+
+        <div class="campo">
+            <label for="">Fecha de adquisición</label>
+            <span class="valor">
+                {{ v.fechaAdquisicion | formatdatetime }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">Valor de adquisición</label>
+            <span class="valor">
+                {{ v.valorAdquisicion.valor }} {{ v.valorAdquisicion.moneda }}
+            </span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label>¿El valor de adquisición del inmueble es conforme a?</label>
+            <span class="valor">
+                {{ v.valorConformeA }}
+            </span>
+        </div>
+    </div>
+
+    <h4>Transmisor</h4>
+    <div class="campos">
+        <div class="campo">
+            <label>Tipo de persona</label>
+            <span class="valor">
+                {{ v.transmisor[0].tipoPersona }}
+            </span>
+        </div>
+        {% if v.transmisor[0].tipoPersona == 'MORAL' %}
+        <div class="campo">
+            <label>Nombre o razón social</label>
+            <span class="valor">
+                {{ v.transmisor[0].nombreRazonSocial }}
+            </span>
+        </div>
+        {% endif %}
+    </div>
+
+    <hr>
+    {% endif %}
+    {%endfor%}
+    {% else %}
+    <div>No hay registros</div>
+    {% endif %}
+<!---------------------------------------------------->
+    <h3 class="titulo">11. Vehículos</h3>
+    <p>Todos los datos de los vehículos a nombre de la pareja,
+        dependientes económicos y/o terceros o que sean en copropiedad con el declarante no serán públicos.
+    </p>
+    {% if vehiculos is defined %}
+    {% for v in vehiculos.vehiculo %}
+    {% if v.titular[0].clave == 'DEC' %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo de vehículo</label>
+            <span class="valor">
+                {{ v.tipoVehiculo.valor }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Marca</label>
+            <span class="valor">
+                {{ v.marca }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Modelo</label>
+            <span class="valor">
+                {{ v.modelo }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Año</label>
+            <span class="valor">
+                {{ v.anio }}
+            </span>
+        </div>
+    </div>
+
+    <div class="campos">
+        <div class="campo">
+            <label for="">Forma de adquisición</label>
+            <span class="valor">
+                {{ v.formaAdquisicion.valor }}
+            </span>
+        </div>
+        
+        <div class="campo">
+            <label for="">Forma de pago</label>
+            <span class="valor">
+                {{ v.formaPago }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">Valor de adquisición</label>
+            <span class="valor">
+                {{ v.valorAdquisicion.valor }}
+                {{ v.valorAdquisicion.moneda }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">Fecha de adquisición</label>
+            <span class="valor">
+                {{ v.fechaAdquisicion | formatdatetime }}
+            </span>
+        </div>
+    </div>
+    <!-- transmisor -->
+    <h4>Transmisor</h4>
+    <div class="campos">
+        <div class="campo">
+            <label>Tipo de persona</label>
+            <span class="valor">
+                {{ v.transmisor[0].tipoPersona }}
+            </span>
+        </div>
+        {% if v.transmisor[0].tipoPersona == 'MORAL' %}
+        <div class="campo">
+            <label>Nombre o razón social</label>
+            <span class="valor">
+                {{ v.transmisor[0].nombreRazonSocial }}
+            </span>
+        </div>
+        {% endif %}
+    </div>
+    <hr>
+    {% endif %}
+    {%endfor%}
+    {% else %}
+    <div>No hay registros</div>
+    {% endif %}
+<!---------------------------------------------------->
+    <h3 class="titulo">12. Bienes muebles</h3>
+    <p>Todos los datos de bienes declarados a nombre de la pareja, dependientes económicos y/o 
+        terceros o que sean en copropiedad con el declarante no serán públicos.
+    </p>
+
+    {% if bienesMuebles is defined %}
+    {% for b in bienesMuebles.bienMueble %}
+    {% if b.titular[0].clave == 'DEC' %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo</label>
+            <span class="valor">
+                {{ b.tipoBien.valor }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Descripción</label>
+            <span class="valor">
+                {{ b.descripcionGeneralBien }}
+            </span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Forma de adquisición</label>
+            <span class="valor">
+                {{ b.formaAdquisicion.valor }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Forma de pago</label>
+            <span class="valor">
+                {{ b.formaPago }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Valor de adquisición</label>
+            <span class="valor">
+                {{ b.valorAdquisicion.valor }}
+                {{ b.valorAdquisicion.moneda }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Fecha de adquisición</label>
+            <span class="valor">
+                {{ b.fechaAdquisicion | formatdatetime }}
+            </span>
+        </div>
+    </div>
+    {% if b.transmisor|length > 0 %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo de persona</label>
+            <span class="valor">
+                {{ b.transmisor[0].tipoPersona }}
+            </span>
+        </div>
+
+        {% if b.transmisor[0].tipoPersona != 'FISICA' %}
+        <div class="campo">
+            <label for="">Transmisor</label>
+            <span class="valor">
+                {{ b.transmisor[0].nombreRazonSocial }}
+            </span>
+        </div>
+        <!-- <div class="campo">
+            <label for="">RFC</label>
+            <span class="valor">
+                {{ b.transmisor[0].rfc }}
+            </span>
+        </div> -->
+        {%endif%}
+    </div>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+<!---------------------------------------------------->
+    <h3 class="titulo">13. Inversiones, cuentas bancarias u otro tipo de valores</h3>
+    <p>Todos los datos de las inversiones, cuentas bancaria y otro tipo de valores/activos a nombre de la pareja,
+        dependientes económicos y/o terceros o que sean en copropiedad con el declarante no serán públicos.
+    </p>
+    {% if inversionesCuentasValores is defined %}
+    {% for v in inversionesCuentasValores.inversion %}
+    {% if v.titular[0].clave == 'DEC' %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo de inversión / activo</label>
+            <span class="valor">
+                {{ v.tipoInversion.valor }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Subtipo</label>
+            <span class="valor">
+                {{ v.subTipoInversion.valor }}
+            </span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">¿Dónde se localiza la inversión, cuenta bancaria y otro tipo de valores/activos?</label>
+            <span class="valor">
+                {% if v.localizacionInversion.pais is not defined or v.localizacionInversion.pais is none %}
+                <span>En méxico</span>
+                {% else %}
+                <span>En el extranjero</span>
+                {% endif %}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">Tipo de moneda</label>
+            <span class="valor">
+                {{ v.saldoSituacionActual.moneda }}
+            </span>
+        </div>
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Institución o razón social</label>
+            <span class="valor">
+                {{ v.localizacionInversion.institucionRazonSocial }}
+            </span>
+        </div>
+        <div class="campo">
+            <label for="">RFC</label>
+            <span class="valor">
+                {{ v.localizacionInversion.rfc }}
+            </span>
+        </div>
+    </div>
+
+    <hr>
+    {% endif %}
+    {%endfor%}
+    {% else %}
+    <div>No hay registros</div>
+    {% endif %}
+    <h3 class="titulo">14. Adeudos/Pasivos</h3>
+    <p>Todos los datos de los adeudos / pasivos a nombre de la pareja,
+        dependientes económicos y/o terceros o que sean en copropiedad con el declarante no serán públicos.
+    </p>
+
+    {% if adeudosPasivos is defined %}
+    {% for v in adeudosPasivos.adeudo %}
+    {% if v.titular[0].clave == 'DEC' %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo de adeudo</label>
+            <span class="valor">
+                {{ v.tipoAdeudo.valor }}
+            </span>
+        </div>
+
+        <div class="campo">
+            <label for="">Fecha de adquisición del adeudo</label>
+            <span class="valor">
+                {{ v.fechaAdquisicion  | formatdatetime }}
+            </span>
+        </div>
+    </div>
+    <h4>Otorgante del crédito</h4>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo de persona</label>
+            <span class="valor">
+                {{ v.otorganteCredito.tipoPersona }}
+            </span>
+        </div>
+        {% if v.otorganteCredito.tipoPersona != 'FISICA' %}
+        <div class="campo">
+            <label for="">Nombre de la institución</label>
+            <span class="valor">
+                {{ v.otorganteCredito.nombreInstitucion }}
+            </span>
+        </div>
+        <!-- <div class="campo">
+            <label for="">RFC</label>
+            <span class="valor">
+                {{ v.otorganteCredito.rfc }}
+            </span>
+        </div> -->
+        {%endif%}
+        <div class="campo">
+            <label for="">¿Dónde se localiza el adeudo?</label>
+            <span class="valor">
+                {% if v.localizacionAdeudo.pais == 'MX' %}
+                <span>En méxico</span>
+                {% else %}
+                <span>En el extranjero</span>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+    <hr>
+    {% endif %}
+    {%endfor%}
+    {% else %}
+    <div>No hay registros</div>
+    {% endif %}
+
+
+    <h3 class="titulo">15. Préstamos o comodato por terceros </h3>
+    {% if prestamoComodato is defined %}
+    {% for v in prestamoComodato.prestamo %}
+
+    {% if v.tipoBien.inmueble is none %}
+    <!-- vehículo -->
+        <div class="campos">
+            <div class="campo">
+                <label for="">Tipo de bien</label>
+                <span class="valor">Vehículo</span>
+            </div>
+            
+        </div>
+        <div class="campos">
+            <div class="campo">
+                <label for="">Tipo de vehículo</label>
+                <span class="valor">{{ v.tipoBien.vehiculo.tipo.valor }}</span>
+            </div>
+            <div class="campo">
+                <label for="">Marca</label>
+                <span class="valor">{{ v.tipoBien.vehiculo.marca }}</span>
+            </div>
+            <div class="campo">
+                <label for="">Modelo</label>
+                <span class="valor">{{ v.tipoBien.vehiculo.modelo }}</span>
+            </div>
+            <div class="campo">
+                <label for="">Año</label>
+                <span class="valor">{{ v.tipoBien.vehiculo.anio }}</span>
+            </div>
+        </div>
+        <!-- <div class="campos">
+            <div class="campo">
+                <label for="">Lugar de registro</label>
+                {% if v.tipoBien.vehiculo.lugarRegistro.pais is none %}
+                    <span class="valor">En México</span>
+                {% else %}
+                    <span class="valor">En el extranjero</span>
+                {% endif %}
+            </div>
+
+            {% if v.tipoBien.vehiculo.lugarRegistro.pais is none %}
+                <div class="campo">
+                    <label for="">Entidad federativa</label>
+                    <span class="valor">{{ v.tipoBien.vehiculo.lugarRegistro.entidadFederativa.valor }}</span>
+                </div>
+            {% endif %}
+        </div> -->
+    {% else %}
+    <!-- Inmueble -->
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo de bien</label>
+            <span class="valor">Inmueble</span>
+        </div>
+    </div>
+        <div class="campos">
+            <div class="campo">
+                <label for="">Tipo de inmueble</label>
+                <span class="valor">{{ v.tipoBien.inmueble.tipoInmueble.valor }}</span>
+            </div>
+<!--             
+        {% if (v.tipoBien.inmueble.domicilioMexico is not defined) or (v.tipoBien.inmueble.domicilioMexico is none) %}
+            <div class="campo">
+                <label for="">Ubicación del inmueble</label>
+                <span class="valor">En el extranjero</span>
+            </div>
+        {% else %}
+            <div class="campo">
+                <label for="">Ubicación del inmueble</label>
+                <span class="valor">En México</span>
+            </div>
+        </div>
+        {% endif %} -->
+    </div>
+    {% endif %}
+    
+    <h4>Dueño o titular</h4>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo de persona</label>
+            <span class="valor">{{  v.duenoTitular.tipoDuenoTitular }}</span>
+        </div>
+    </div>
+
+    <hr>
+    {% endfor %}
+    {% else %}
+    <div>No hay registros</div>
+    {% endif %}
+
+    <h2 class="titulo">Declaración de intereses</h2>
+
+    <h3 class="titulo">1. Participación en empresas, sociedades o asociaciones (hasta los últimos dos años) </h3>
+    {% if participacion is defined %}
+    {% for v in participacion.participacion %}
+    {% if v.tipoRelacion == 'DECLARANTE' %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Nombre de la empresa, sociedad o asociación</label>
+            <span class="valor">{{  v.nombreEmpresaSociedadAsociacion }}</span>
+        </div>
+
+        <div class="campo">
+            <label for="">RFC</label>
+            <span class="valor">{{  v.rfc }}</span>
+        </div>
+    </div>
+    {%if v.recibeRemuneracion == true %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Porcentaje de participación de acuerdo a escritura</label>
+            <span class="valor">{{  v.porcentajeParticipacion }}%</span>
+        </div>
+
+        <div class="campo">
+            <label for="">Monto mensual de remuneración recibida</label>
+            <span class="valor">{{  v.montoMensual.valor }} {{  v.montoMensual.moneda }}</span>
+        </div>
+    </div>
+    {%endif%}
+    <label for="">Lugar donde se ubica</label>
+    <div class="campos">
+        {% if (v.ubicacion.pais is not defined) or (v.ubicacion.pais is none) %}
+            <div class="campo">
+                <label for="">País</label>
+                <span class="valor">En México</span>
+            </div>
+            <div class="campo">
+                <label for="">Entidad federativa</label>
+                <span class="valor">{{ v.ubicacion.entidadFederativa.valor }}</span>
+            </div>
+        {% else %}
+            <div class="campo">
+                <label for="">País</label>
+                <span class="valor">En el extranjero</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <div>No hay registros</div>
+    {% endif %}
+
+    <!---------- -->
+    <h3 class="titulo">2. ¿Participa en la toma de decisiones de alguna de estas instituciones? (hasta los últimos dos años)</h3>
+    <p>Todos los datos de la participación en alguna de estas instituciones de la pareja o dependientes económicos no serán públicos</p>
+
+    {% if participacionTomaDecisiones is defined %}
+    {% for v in participacionTomaDecisiones.participacion %}
+    {% if v.tipoRelacion == 'DECLARANTE' %}
+    <div class="campos">
+        <div class="campo">
+            <label for="">Tipo de institución</label>
+            <span class="valor">{{  v.tipoInstitucion.valor }}</span>
+        </div>
+
+        <!-- <div class="campo">
+            <label for="">Nombre de la institución</label>
+            <span class="valor">{{  v.nombreInstitucion }}</span>
+        </div>
+
+        <div class="campo">
+            <label for="">RFC</label>
+            <span class="valor">{{  v.rfc }}</span>
+        </div> -->
+    </div>
+    <div class="campos">
+        <div class="campo">
+            <label for="">Puesto o rol</label>
+            <span class="valor">{{  v.puestoRol }}</span>
+        </div>
+
+        <div class="campo">
+            <label for="">Fecha de inicio de participación dentro de la institución</label>
+            <span class="valor">{{ v.fechaInicioParticipacion | formatdatetime }}</span>
+        </div>
+    </div>
+    <div class="campos">
+        {% if (v.recibeRemuneracion == true) %}
+        <div class="campo">
+            <label for="">Recibe remuneración por su participación</label>
+            <span class="valor">Sí</span>
+        </div>
+        <div class="campo">
+            <label for="">Monto de la remuneración mensual:</label>
+            <span class="valor">${{v.montoMensual.valor}}</span>
+        </div>
+        {%else%}
+        <div class="campo">
+            <label for="">Recibe remuneración por su participación</label>
+            <span class="valor">No</span>
+        </div>
+        {% endif %}
+    </div>
+
+    <label for="">Lugar donde se ubica</label>
+    <div class="campos">
+        {% if (v.ubicacion.pais is not defined) or (v.ubicacion.pais is none) %}
+            <div class="campo">
+                <label for="">País</label>
+                <span class="valor">En México</span>
+            </div>
+            <div class="campo">
+                <label for="">Entidad federativa</label>
+                <span class="valor">{{ v.ubicacion.entidadFederativa.valor }}</span>
+            </div>
+        {% else %}
+            <div class="campo">
+                <label for="">País</label>
+                <span class="valor">En el extranjero</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %} <!-- si es declarante -->
+    {% endfor %} <!-- recorrido de registros -->
+    {% else %} <!-- si hay registros -->
+    <div>No hay registros</div>
+    {% endif %} <!-- si no hay registros -->
+<!-- ------------------------------------------------------------------------------------------------- -->
+<h3 class="titulo">3. Apoyos o beneficios públicos (hasta los últimos dos años)</h3>
+<p>
+    Los datos de terceros, siempre y cuando sean personas físicas no serán públicos.
+    Todos los datos de la participación en empresas, sociedades o asociaciones de la pareja o dependientes económicos no seran públicos. 
+</p>
+
+{% if apoyos is defined %}
+{% for v in apoyos.apoyo %}
+{% if v.beneficiarioPrograma.valor == 'DECLARANTE' %}
+<div class="campos">
+    <div class="campo">
+        <label for="">Nombre del programa </label>
+        <span class="valor">{{  v.nombrePrograma }}</span>
+    </div>
+
+    <div class="campo">
+        <label for="">Institución que otorga el apoyo</label>
+        <span class="valor">{{  v.institucionOtorgante }}</span>
+    </div>
+
+    <div class="campo">
+        <label for="">Nivel u orden de gobierno</label>
+        <span class="valor">{{  v.nivelOrdenGobierno }}</span>
+    </div>
+</div>
+<div>
+    <div class="campo">
+        <label for="">Tipo de apoyo</label>
+        <span class="valor">{{  v.tipoApoyo.valor }}</span>
+    </div>
+
+    <div class="campo">
+        <label for="">Forma de recepción</label>
+        <span class="valor">{{  v.formaRecepcion }}</span>
+    </div>
+    {% if(v.formaRecepcion == 'MONETARIO') %}
+    <div class="campo">
+        <label for="">Monto aproximado del apoyo mensual</label>
+        <span class="valor">${{  v.montoApoyoMensual.valor }} {{v.montoApoyoMensual.moneda}}</span>
+    </div>
+    {%else%}
+    <div class="campo">
+        <label for="">Especifique el apoyo</label>
+        <span class="valor">{{  v.especifiqueApoyo }}</span>
+    </div>
+    {%endif%}
+</div>
+{% endif %} <!-- si es declarante -->
+{% endfor %} <!-- recorrido de registros -->
+{% else %} <!-- si hay registros -->
+<div>No hay registros</div>
+{% endif %} <!-- si no hay registros -->
+
+<!-- ------------------------------------------------------------------------------------------------- -->
+<h3 class="titulo">4. Representación (hasta los últimos dos años)</h3>
+<p>
+    Los datos de terceros, siempre y cuando sean personas físicas no serán públicos.
+    Todos los datos de representación de la pareja o dependientes económicos no seran públicos. 
+</p>
+
+{% if representaciones is defined %}
+{% for v in representaciones.representacion %}
+{% if v.tipoRelacion == 'DECLARANTE' %}
+<div class="campos">
+    <div class="campo">
+        <label for="">Tipo de representación </label>
+        <span class="valor">{{  v.tipoRepresentacion }}</span>
+    </div>
+
+    <div class="campo">
+        <label for="">Tipo de persona</label>
+        <span class="valor">{{  v.tipoPersona }}</span>
+    </div>
+
+    {% if v.tipoPersona != 'FISICA' %}
+    <div class="campo">
+        <label for="">RFC</label>
+        <span class="valor">{{  v.rfc }}</span>
+    </div>
+    <div class="campo">
+        <label for="">Nombre o razón social</label>
+        <span class="valor">{{  v.nombreRazonSocial }}</span>
+    </div>
+    {% endif %}
+</div>
+
+<div class="campos">
+    {% if (v.recibeRemuneracion == true) %}
+    <div class="campo">
+        <label for="">Recibe remuneración por su participación</label>
+        <span class="valor">Sí</span>
+    </div>
+    
+    <div class="campo">
+        <label for="">Monto de la remuneración mensual:</label>
+        <span class="valor">${{v.montoMensual.valor}} {{ v.montoMensual.moneda }}</span>
+    </div>
+    {%else%}
+    <div class="campo">
+        <label for="">Recibe remuneración por su participación</label>
+        <span class="valor">No</span>
+    </div>
+    {% endif %}
+</div>
+
+<label for="">Lugar donde se ubica</label>
+    <div class="campos">
+    {% if (v.ubicacion.pais is not defined) or (v.ubicacion.pais is none) %}
+        <div class="campo">
+            <label for="">País</label>
+            <span class="valor">En México</span>
+        </div>
+        <div class="campo">
+            <label for="">Entidad federativa</label>
+            <span class="valor">{{ v.ubicacion.entidadFederativa.valor }}</span>
+        </div>
+    {% else %}
+        <div class="campo">
+            <label for="">País</label>
+            <span class="valor">En el extranjero</span>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+
+<div class="campos">
+    <div class="campo">
+        <label for="">Sector productivo al que pertenece</label>
+        <span class="valor">{{  v.sector.valor }}</span>
+    </div>
+</div>
+
+{% endif %} <!-- si es declarante -->
+{% endfor %} <!-- recorrido de registros -->
+{% else %} <!-- si hay registros -->
+<div>No hay registros</div>
+{% endif %} <!-- si no hay registros -->
+
+
+<!-- ------------------------------------------------------------------------------------------------- -->
+<h3 class="titulo">5. Clientes principales (hasta los últimos dos años)</h3>
+<p>
+    Los datos de terceros, siempre y cuando sean personas físicas no serán públicos.
+    Todos los datos de clientes principales de la pareja o dependientes económicos no serán públicos.
+</p>
+
+{% if clientesPrincipales is defined %}
+{% for v in clientesPrincipales.cliente %}
+{% if v.tipoRelacion == 'DECLARANTE' %}
+<div class="campos">
+    <div class="campo">
+        <label for="">Nombre de la empresa o servicio que proporciona </label>
+        <span class="valor">{{  v.empresa.nombreEmpresaServicio }}</span>
+    </div>
+
+    <div class="campo">
+        <label for="">RFC</label>
+        <span class="valor">{{  v.empresa.rfc }}</span>
+    </div>
+</div>
+<h4>Datos del cliente</h4>
+<div class="campos">
+    <div class="campo">
+        <label for="">Tipo de persona</label>
+        <span class="valor">{{  v.clientePrincipal.tipoPersona }}</span>
+    </div>
+    {% if v.clientePrincipal.tipoPersona != 'FISICA' %}
+    <div class="campo">
+        <label for="">RFC</label>
+        <span class="valor">{{  v.clientePrincipal.rfc }}</span>
+    </div>
+    <div class="campo">
+        <label for="">Nombre o razón social</label>
+        <span class="valor">{{  v.clientePrincipal.nombreRazonSocial }}</span>
+    </div>
+    {% endif %}
+</div>
+
+<div class="campos">
+    <div class="campo">
+        <label for="">Sector al que pertenece</label>
+        <span class="valor">{{ v.sector.valor }}</span>
+    </div>
+    <div class="campo">
+        <label for="">Monto aproximado del beneficio o ganancia mensual que obtiene</label>
+        <span class="valor">${{v.montoAproximadoGanancia.valor}} {{ v.montoAproximadoGanancia.moneda }}</span>
+    </div>
+</div>
+
+<label for="">Lugar donde se ubica</label>
+    <div class="campos">
+    {% if (v.ubicacion.pais is not defined) or (v.ubicacion.pais is none) %}
+        <div class="campo">
+            <label for="">País</label>
+            <span class="valor">En México</span>
+        </div>
+        <div class="campo">
+            <label for="">Entidad federativa</label>
+            <span class="valor">{{ v.ubicacion.entidadFederativa.valor }}</span>
+        </div>
+    {% else %}
+        <div class="campo">
+            <label for="">País</label>
+            <span class="valor">En el extranjero</span>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endif %} <!-- si es declarante -->
+{% endfor %} <!-- recorrido de registros -->
+{% else %} <!-- si hay registros -->
+<div>No hay registros</div>
+{% endif %} <!-- si no hay registros -->
+
+
+<!-- ------------------------------------------------------------------------------------------------- -->
+<h3 class="titulo">6. Beneficios privados (Hasta los últimos dos años)</h3>
+<p>
+    Los datos de terceros, siempre y cuando sean personas físicas no serán públicos.
+    Todos los datos de la pareja o dependientes económicos no serán públicos.
+</p>
+
+{% if beneficiosPrivados is defined %}
+{% for v in beneficiosPrivados.beneficio %}
+{% if v.beneficiario.valor == 'DECLARANTE' %}
+<div class="campos">
+    <div class="campo">
+        <label for="">Tipo de beneficio </label>
+        <span class="valor">{{  v.tipoBeneficio.valor }}</span>
+    </div>
+</div>
+<h4>Otorgante</h4>
+<div class="campos">
+    <div class="campo">
+        <label for="">Tipo de persona</label>
+        <span class="valor">{{  v.otorgante.tipoPersona }}</span>
+    </div>
+    {% if v.otorgante.tipoPersona != 'FISICA' %}
+    <div class="campo">
+        <label for="">RFC</label>
+        <span class="valor">{{  v.otorgante.rfc }}</span>
+    </div>
+    <div class="campo">
+        <label for="">Nombre o razón social</label>
+        <span class="valor">{{  v.otorgante.nombreRazonSocial }}</span>
+    </div>
+    {% endif %}
+</div>
+
+<div class="campos">
+    <div class="campo">
+        <label for="">Forma de recepción del beneficio</label>
+        <span class="valor">{{  v.formaRecepcion }}</span>
+    </div>
+    
+    <div class="campo">
+        <label for="">Especifique el beneficio</label>
+        <span class="valor">{{  v.especifiqueBeneficio }}</span>
+    </div>
+</div>
+
+<div class="campos">
+    <div class="campo">
+        <label for="">Sector al que pertenece</label>
+        <span class="valor">{{ v.sector.valor }}</span>
+    </div>
+    <div class="campo">
+        <label for="">Monto aproximado del beneficio o ganancia mensual que obtiene</label>
+        <span class="valor">${{v.montoMensualAproximado.valor}} {{ v.montoMensualAproximado.moneda }}</span>
+    </div>
+</div>
+{% endif %} <!-- si es declarante -->
+{% endfor %} <!-- recorrido de registros -->
+{% else %} <!-- si hay registros -->
+<div>No hay registros</div>
+{% endif %} <!-- si no hay registros -->
+
+
+
+<!-- ------------------------------------------------------------------------------------------------- -->
+<h3 class="titulo">7. Fideicomisos (hasta los últimos dos años)</h3>
+<p>
+    Los datos de terceros, siempre y cuando sean personas físicas no serán públicos.
+    Todos los datos de participación en fideicomisos de la pareja o dependientes económicos no serán públicos.
+</p>
+
+{% if fideicomisos is defined %}
+{% for v in fideicomisos.fideicomiso %}
+{% if v.tipoRelacion == 'DECLARANTE' %}
+<div class="campos">
+    <div class="campo">
+        <label for="">Tipo de fideicomiso </label>
+        <span class="valor">{{  v.tipoFideicomiso }}</span>
+    </div>
+    <div class="campo">
+        <label for="">Tipo de participación</label>
+        <span class="valor">{{  v.tipoParticipacion }}</span>
+    </div>
+    <div class="campo">
+        <label for="">RFC del fideicomiso</label>
+        <span class="valor">{{  v.rfcFideicomiso }}</span>
+    </div>
+</div>
+{% if v.fideicomisario %}
+<h4>Fideicomisario</h4>
+<div class="campos">
+    <div class="campo">
+        <label for="">Tipo de persona</label>
+        <span class="valor">{{  v.fideicomisario.tipoPersona }}</span>
+    </div>
+    {% if v.fideicomisario.tipoPersona != 'FISICA' %}
+    <div class="campo">
+        <label for="">RFC</label>
+        <span class="valor">{{  v.fideicomisario.rfc }}</span>
+    </div>
+    <div class="campo">
+        <label for="">Nombre o razón social</label>
+        <span class="valor">{{  v.fideicomisario.nombreRazonSocial }}</span>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+<div class="campos">
+    <div class="campo">
+        <label for="">Sector al que pertenece</label>
+        <span class="valor">{{ v.sector.valor }}</span>
+    </div>
+    <div class="campo">
+        <label for="">¿Dónde se localiza el fideicomiso?</label>
+        <span class="valor">
+            {% if v.extranjero == 'MX' %}
+            En México
+            {% else %}
+            En el extranjero
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endif %} <!-- si es declarante -->
+{% endfor %} <!-- recorrido de registros -->
+{% else %} <!-- si hay registros -->
+<div>No hay registros</div>
+{% endif %} <!-- si no hay registros -->
+
+{% endif %} <!-- if declaracionCompleta == true (del 9 al 15 y la de intereses ) -->
+<hr>
+<p>De conformidad con los artículos 32 y 46 de la Ley General de Responsabilidades Administrativas todos los servidores públicos tienen obligación de
+presentar, bajo protesta de decir verdad, la Declaración de Situación Patrimonial y de Intereses, en los plazos previstos. Por su parte, el artículo 3, fracción
+VI de la Ley General de Responsabilidades Administrativas define el conflicto de interés como: "La posible afectación del desempeño Imparcial y objetivo
+de las funciones de los Servidores Públicos en razón de intereses personales, familiares o de negocios".</p>
+
+<p>Además, el artículo 58 de dicha Ley General dispone que incurre en actuación bajo “Conflicto de Interés”, el servidor público que intervenga por motivo de
+su empleo, cargo o comisión en cualquier forma, en la atención, tramitación o resolución de asuntos en los que tenga Conflicto de Interés o impedimento
+legal. También prevé la obligación de informar al jefe inmediato aquellos casos en los que el servidor público pueda incurrir en actuación bajo Conflicto de
+Interés, así como de excusarse o abstenerse de atender, tramitar o resolver, actuar o intervenir en los casos mencionados.</p>
+<p>
+Consiente de todo lo anterior expuesto, se ratifica que a partir del momento en que pueda configurarse un posible Conflicto de Interés lo hare del
+conocimiento de la autoridad correspondiente, de acuerdo con las disposiciones normativas que sean aplicables al caso especifico.
+</p>
+{% if datosGenerales is defined %}
+
+<div class="firma">    
+    <span class="nombre">
+        {{ datosGenerales.nombre }} {{datosGenerales.primerApellido}} {{ datosGenerales.segundoApellido }}</span>
+    </span>
+</div>
+{% endif %}
+<div class="campos">
+    <div class="campo">
+        <label for="">Fecha</label>
+        <span class="valor">
+            {{ updatedAt | formatdatetime  }}
+        </span>
+    </div>
+</div>
+<p>
+    El presente documento se expide con fundamento en el artículo 29 de la Ley General de Responsabilidades Administrativas; artículo 70 fracción XII de la
+Ley General de Transparencia y Acceso a la Información Pública; numeral Décimo Segundo, fracción IX, de los Lineamientos Técnicos Generales para la
+publicación, homologación y estandarización de la información de las obligaciones establecidas en el Título Quinto y en la fracción IV del artículo 31 de la
+Ley General de Transparencia y Acceso a la Información Pública, que deben de difundir los sujetos obligados en los portales de Internet y en la Plataforma
+Nacional de Transparencia; artículo 15 fracción XII de la Ley de Transparencia y Acceso a la Información Pública para el Estado de Veracruz de Ignacio de la
+Lave; y en apego al Sistema de Portales de Obligaciones de Transparencia (SIPOT).
+</p>
+</body>
+</html>
