@@ -10,7 +10,7 @@
   </h3> 
   {% if ingresos.remuneracionMensualCargoPublico %}
     <div class="row">
-      <div class="column left-size text-left blue-background">Remuneracion Mensual Cargo Publico</div>
+      <div class="column left-size text-left blue-background">Remuneración {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Cargo Público</div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.remuneracionMensualCargoPublico.valor }} {{ ingresos.remuneracionMensualCargoPublico.moneda }} </div>
     </div>
   {% endif %}
