@@ -121,7 +121,7 @@
 
   {% if ingresos.ingresoMensualNetoDeclarante %}
     <div class="row">
-      <div class="column left-size text-left blue-background">Ingreso Mensual Neto del Declarante</div>
+      <div class="column left-size text-left blue-background">Ingreso {% if tipoDeclaracion == 'INICIAL' %} Mensual {% elif tipoDeclaracion == 'MODIFICACION' %} Anual {% endif %} Neto del Declarante</div>
       <div class="column right-size text-justify text-light white-background">{{ ingresos.ingresoMensualNetoDeclarante.valor }} {{ ingresos.ingresoMensualNetoDeclarante.moneda }}</div>
     </div>
   {% endif %}
