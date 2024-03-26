@@ -1,9 +1,9 @@
 <article>
     <h2 class="text-center">
-        {{ acuse.ente_publico | replaceInstitution(institucion, 'ente_publico') }} <br>
-        {{ acuse.tipo_declaracion }} {{ acuse.ejercicio }}. <br>
+        {{ ente_publico }} <br>
+        {{ acuse.tipo_declaracion }} {{ anioEjercicio }}. <br>
         ID DE DECLARACIÓN: {{ _id }} <br>
-        {{ acuse.lugar }} {{ updatedAt | formatdatetime('%d de %B de %Y') | dateTranslation }}
+        {{ lugar }} {{ updatedAt | formatdatetime('%d de %B de %Y') | dateTranslation }}
     </h2>
     <ul class="no-decoration mt-80px">
         <li class="bold">C. {{datosGenerales.nombre}} {{datosGenerales.primerApellido}} {{datosGenerales.segundoApellido | dataEmpty}}</li>
@@ -18,7 +18,7 @@
     </section>
     <p class="text-center">ATENTAMENTE</p>
     <p class="text-center mt-100px">
-        {{ acuse.servidor_publico_recibe.nombre | replaceInstitution(institucion, 'nombre') }} <br>
-        {{ acuse.servidor_publico_recibe.cargo | replaceInstitution(institucion, 'cargo') }}
+        {{ servidor_publico_recibe.nombre }} <br>
+        {{ servidor_publico_recibe.cargo }}
     </p>
 </article>
