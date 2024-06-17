@@ -14,6 +14,8 @@ from api.generators.acuse_declaracion import AcuseDeclaracionGenerator
 class AcuseDeclaracion(Resource):
     def __init__(self):
         self.parser: RequestParser = RequestParser(bundle_errors=True)
+        self.parser.add_argument('owner', type=str, required=True, help='owner is required')
+        self.parser.add_argument('institucionData', type=dict, required=True, help='institucionData is required')
         self.parser.add_argument('id', type=str, required=True, help='id is required')
         self.parser.add_argument('declaracion', type=dict, required=True, help='declaracion is required')
         self.parser.add_argument('preliminar', type=bool, required=False)
@@ -28,6 +30,8 @@ class AcuseDeclaracion(Resource):
         try:
             raw_data: Dict[str, Any] = self.parser.parse_args()
             report: AcuseDeclaracionGenerator = AcuseDeclaracionGenerator(
+                owner=raw_data["owner"],
+                institucionData=raw_data["institucionData"],
                 id=raw_data['id'],
                 data=raw_data['declaracion'],
                 preliminar=raw_data['preliminar'],
